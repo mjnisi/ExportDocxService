@@ -1,0 +1,2 @@
+
+var toc_data = [{"name":"Preface ","href":"#preface","children":[]},{"name":"Preamble ","href":"#preamble","children":[]},{"name":"Enacting Terms ","href":"#body","children":[{"name":"Parrafo1 Parrafo1Parrafo1 Parrafo1 Parrafo1 Par...","href":"#paragraph_1","children":[]},{"name":"Parrafo2 Parrafo2 Parrafo2 Parrafo2 Parrafo2 Pa...","href":"#akn_paragraph_ALa63E","children":[]}]},{"name":"Signature ","href":"#conclusions","children":[]}];

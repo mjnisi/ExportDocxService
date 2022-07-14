@@ -3,19 +3,28 @@ package eu.europa.edpb.services;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
+import java.util.Calendar;
 
 import org.apache.commons.compress.utils.IOUtils;
+import org.apache.log4j.Logger;
 import org.docx4j.Docx4J;
+import org.docx4j.wml.ObjectFactory;
 import org.docx4j.jaxb.Context;
 import org.docx4j.model.datastorage.migration.VariablePrepare;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
+import org.docx4j.openpackaging.parts.WordprocessingML.CommentsPart;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
-import org.docx4j.wml.SectPr.PgMar;
-import org.docx4j.wml.ObjectFactory;
+import org.docx4j.wml.CommentRangeEnd;
+import org.docx4j.wml.CommentRangeStart;
+import org.docx4j.wml.Comments;
+import org.docx4j.wml.Comments.Comment;
+import org.docx4j.wml.P;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-import com.ximpleware.AutoPilot;	
+import com.ximpleware.AutoPilot;
 import com.ximpleware.NavException;
 import com.ximpleware.ParseException;
 import com.ximpleware.VTDGen;
@@ -34,27 +43,41 @@ public class ExportServiceImpl implements ExportService {
 	final static String STYLE_CONTENT = "StyleContent";
 	final static String STYLE_CONCLUTION = "StyleConclution";
 
+	private ObjectFactory factory = Context.getWmlObjectFactory();
+	private WordprocessingMLPackage mlPackage;
+	
+	final static Logger logger = Logger.getLogger(ExportServiceImpl.class);
+
+
 	@Override
 	public String exportStatement(String xmlDoc) {
+
+		if(logger.isDebugEnabled()){
+			logger.debug("Init");
+		}
 		
-		String EXPORT_TEMPLATE_BVD_FILE = "/templates/Statement.dotx";
-
-
-		WordprocessingMLPackage mlPackage = createDocxFromTemplateVD(EXPORT_TEMPLATE_BVD_FILE);
+		String EXPORT_TEMPLATE_BVD_FILE = "/templates/StatementEDPB.dotx";
 
 		try {
-//			Con el objeto devuelto (MainDocumentPart), ya empezaríamos a realizar las inserciones en el 
-//			futuro documento docx con el siguiente método: 			mainDocumentPart.addStyledParagraphOfText("LEOSCONCLUSIONPRES", conclusionPresidente);
-//			Aquí tener en cuenta que el primer parámetro es un estilo que tendremos creado en la plantilla de Word a usar. 
-//			El según parámetro es el String a insertar en el documento docx con el estilo comentado.
-
-			MainDocumentPart mainDocumentPart = loadTemplate(mlPackage);
-			mainDocumentPart.getJaxbElement().getBody().getSectPr().getPgMar().setTop(new BigInteger("0"));
 			
+			mlPackage = createDocxFromTemplateVD(EXPORT_TEMPLATE_BVD_FILE);
 			
-			InputStream is = getClass().getResourceAsStream("/documents/bill_cl59nigaz00023o113tmadl7l.xml");
-			byte[] ba = IOUtils.toByteArray(is);
+			loadTemplate();
+			setMargins();
+			
+			InputStream isXml = getClass().getResourceAsStream(
+					"/documents/Proposal_197_2447391798399561462/PROP_ACT_6020660205072156884/bill_cl5jc32710002q011gkfo1dto.xml");
+			byte[] ba = IOUtils.toByteArray(isXml);
 
+			InputStream isJson = getClass().getResourceAsStream(
+					"/documents/Proposal_197_2447391798399561462/PROP_ACT_6020660205072156884/media/annot_bill_cl5jc32710002q011gkfo1dto.xml.json");
+
+			
+			JSONObject obj = new JSONObject(isJson);
+			JSONArray rows = obj.getJSONArray("rows");
+			JSONObject total = obj.getJSONObject("total");
+			JSONArray replies = obj.getJSONArray("replies");
+			
 			VTDGen vg = new VTDGen();
 			vg.setDoc(ba);
 			vg.parse(false);
@@ -74,8 +97,11 @@ public class ExportServiceImpl implements ExportService {
 					title += vn.toString(result) + " ";
 				}
 			}
-			System.out.println("Title: " + title);
-			mainDocumentPart.addStyledParagraphOfText(STYLE_TITLE, title);
+			
+			mlPackage.getMainDocumentPart().addStyledParagraphOfText(STYLE_TITLE, title);
+			if(logger.isDebugEnabled()){
+				logger.debug("Title : " + title);
+			}
 
 			// Preface
 			ap.resetXPath();
@@ -84,13 +110,14 @@ public class ExportServiceImpl implements ExportService {
 
 			result = -1;
 			result = ap.evalXPath();
-			if (result != -1) {
-				System.out.println("formula: " + vn.toString(result));
-			}
-			mainDocumentPart.addStyledParagraphOfText(STYLE_TITLE_SPACE, "");
-			mainDocumentPart.addStyledParagraphOfText(STYLE_TITLE_SPACE, "");
 
-			mainDocumentPart.addStyledParagraphOfText(STYLE_FORMULA, vn.toString(result));
+			mlPackage.getMainDocumentPart().addStyledParagraphOfText(STYLE_TITLE_SPACE, "");
+			mlPackage.getMainDocumentPart().addStyledParagraphOfText(STYLE_TITLE_SPACE, "");
+
+			mlPackage.getMainDocumentPart().addStyledParagraphOfText(STYLE_FORMULA, vn.toString(result));
+			if(logger.isDebugEnabled()){
+				logger.debug("Formula : " + vn.toString(result));
+			}
 
 			// Body
 			ap.resetXPath();
@@ -98,17 +125,19 @@ public class ExportServiceImpl implements ExportService {
 			ap.selectXPath("//body/paragraph/content/p/text()");
 
 			result = -1;
-
-			mainDocumentPart.addStyledParagraphOfText(STYLE_CONTENT, "");
-			mainDocumentPart.addStyledParagraphOfText(STYLE_CONTENT, "");
+			mlPackage.getMainDocumentPart().addStyledParagraphOfText(STYLE_CONTENT, "");
+			mlPackage.getMainDocumentPart().addStyledParagraphOfText(STYLE_CONTENT, "");
 
 			while ((result = ap.evalXPath()) != -1) {
-				System.out.println("Paragraph: " + vn.toString(result));
-				mainDocumentPart.addStyledParagraphOfText(STYLE_CONTENT, vn.toString(result));
+				mlPackage.getMainDocumentPart().addStyledParagraphOfText(STYLE_CONTENT, vn.toString(result));
+				
+				if(logger.isDebugEnabled()){
+					logger.debug("Paragraph : " + vn.toString(result));
+				}
 			}
 
-			mainDocumentPart.addStyledParagraphOfText(STYLE_CONTENT, "");
-			mainDocumentPart.addStyledParagraphOfText(STYLE_CONTENT, "");
+			mlPackage.getMainDocumentPart().addStyledParagraphOfText(STYLE_CONTENT, "");
+			mlPackage.getMainDocumentPart().addStyledParagraphOfText(STYLE_CONTENT, "");
 
 			// Conclusion
 			ap.resetXPath();
@@ -119,17 +148,65 @@ public class ExportServiceImpl implements ExportService {
 			result = -1;
 
 			while ((result = ap.evalXPath()) != -1) {
-				System.out.println("Conclution: " + vn.toString(result));
-				mainDocumentPart.addStyledParagraphOfText(STYLE_CONCLUTION, vn.toString(result));
+				mlPackage.getMainDocumentPart().addStyledParagraphOfText(STYLE_CONCLUTION, vn.toString(result));
+				
+				if(logger.isDebugEnabled()){
+					logger.debug("Conclution : " + vn.toString(result));
+				}
 			}
 
-			System.out.println(mainDocumentPart.getXML());
-			
-			
-			// .. content type
-			mlPackage.getContentTypeManager().addDefaultContentType("html", "text/html");
 
-			mlPackage.save(new java.io.File("helloworld0.docx"), Docx4J.FLAG_SAVE_ZIP_FILE);
+			// Comments
+			CommentsPart cp = new CommentsPart();
+			mlPackage.getMainDocumentPart().addTargetPart(cp);
+
+			Comments comments = factory.createComments();
+			cp.setJaxbElement(comments);
+
+			// Add a comment to the comments part
+			java.math.BigInteger commentId = BigInteger.valueOf(0);
+			Comment theComment = createComment(commentId, "MARIA NISI", null, "my first comment");
+			comments.getComment().add(theComment);
+
+			// Add comment reference to document
+			// P paraToCommentOn =
+			// wordMLPackage.getMainDocumentPart().addParagraphOfText("here is some
+			// content");
+			P p = new P();
+
+			mlPackage.getMainDocumentPart().getContent().add(p);
+
+			// Create object for commentRangeStart
+			CommentRangeStart commentrangestart = factory.createCommentRangeStart();
+			commentrangestart.setId(commentId); // substitute your comment id
+
+			// The actual content, in the middle
+			p.getContent().add(commentrangestart);
+
+			org.docx4j.wml.Text t = factory.createText();
+			t.setValue("hello");
+
+			org.docx4j.wml.R run = factory.createR();
+			run.getContent().add(t);
+
+			p.getContent().add(run);
+
+			// Create object for commentRangeEnd
+			CommentRangeEnd commentrangeend = factory.createCommentRangeEnd();
+			commentrangeend.setId(commentId); // substitute your comment id
+
+			p.getContent().add(commentrangeend);
+
+			p.getContent().add(createRunCommentReference(commentId));
+
+//			System.out.println(mlPackage.getMainDocumentPart().getXML());
+//
+//			// ++, for next comment ...
+//			commentId = commentId.add(java.math.BigInteger.ONE);
+
+			System.out.println(mlPackage.getMainDocumentPart().getContent());
+
+			mlPackage.save(new java.io.File("doc2.doc"), Docx4J.FLAG_SAVE_ZIP_FILE);
 
 		} catch (Docx4JException | IOException | ParseException | XPathParseException | XPathEvalException
 				| NavException e) {
@@ -138,16 +215,20 @@ public class ExportServiceImpl implements ExportService {
 
 		return null;
 	}
-	
-	
-	
+
 	@Override
 	public String exportLetter(String xmlDoc) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	
+	private void setMargins() {
+		mlPackage.getMainDocumentPart().getJaxbElement().getBody().getSectPr().getPgMar().setTop(new BigInteger("0"));
 
+	}
+	
+	
 //	Instanciación del documento:
 //	template de word donde se definen los estilos
 
@@ -156,8 +237,13 @@ public class ExportServiceImpl implements ExportService {
 		try {
 			InputStream is = getTemplate(template);
 			wordPackage = WordprocessingMLPackage.load(is);
+			
 		} catch (Docx4JException e) {
-			System.out.println(e.getMessage());
+			logger.error("Error: " + e.getMessage());
+		}
+		
+		if(logger.isDebugEnabled()){
+			logger.debug("Template loaded.");
 		}
 		return wordPackage;
 	}
@@ -170,31 +256,54 @@ public class ExportServiceImpl implements ExportService {
 		return null;
 	}
 
-	// Una vez que tenemos el objeto WordProcessingMLPackage realizaríamos la
-	// siguiente instrucción:
-	private MainDocumentPart loadTemplate(WordprocessingMLPackage createWordProcessing) throws Docx4JException {
+	private MainDocumentPart loadTemplate() throws Docx4JException {
 
-		MainDocumentPart mainDocumentPart = createWordProcessing.getMainDocumentPart();
+		MainDocumentPart mainDocumentPart = mlPackage.getMainDocumentPart();
 
 		try {
-			VariablePrepare.prepare(createWordProcessing);
+			VariablePrepare.prepare(mlPackage);
+
 		} catch (Exception e) {
-//				LOG.error(e.getMessage(),e);
 			System.out.println(e.getMessage());
 		}
 		return mainDocumentPart;
 
 	}
 
-//		Con el objeto devuelto (MainDocumentPart), ya empezaríamos a realizar las inserciones en el 
-//		futuro documento docx con el siguiente método:
+	private org.docx4j.wml.Comments.Comment createComment(java.math.BigInteger commentId, String author, Calendar date,
+			String message) {
 
-//		mainDocumentPart.addStyledParagraphOfText("LEOSCONCLUSIONPRES", conclusionPresidente);
+		org.docx4j.wml.Comments.Comment comment = factory.createCommentsComment();
+		comment.setId(commentId);
+		if (author != null) {
+			comment.setAuthor(author);
+		}
+		if (date != null) {
+//			String dateString = RFC3339_FORMAT.format(date.getTime()) ;	
+//			comment.setDate(value)
+			// TODO - at present this is XMLGregorianCalendar
+		}
+		org.docx4j.wml.P commentP = factory.createP();
+		comment.getEGBlockLevelElts().add(commentP);
+		org.docx4j.wml.R commentR = factory.createR();
+		commentP.getContent().add(commentR);
+		org.docx4j.wml.Text commentText = factory.createText();
+		commentR.getContent().add(commentText);
 
-//		Aquí tener en cuenta que el primer parámetro es un estilo que tendremos creado en la plantilla de Word a usar. 
-//		El según parámetro es el String a insertar en el documento docx con el estilo comentado.
+		commentText.setValue(message);
 
+		return comment;
+	}
 
+	private org.docx4j.wml.R createRunCommentReference(java.math.BigInteger commentId) {
 
+		org.docx4j.wml.R run = factory.createR();
+		org.docx4j.wml.R.CommentReference commentRef = factory.createRCommentReference();
+		run.getContent().add(commentRef);
+		commentRef.setId(commentId);
+
+		return run;
+
+	}
 
 }

@@ -1,0 +1,22 @@
+<importOptions technicalKey="">
+<importJob filename="Bill"
+convertAnnotations="true" comparisonType="none">
+<leos>
+<resource ref="PROP_ACT">
+<includes>
+<include ref="coverpage"/>
+</includes>
+<resource ref="body_cmp_1__dref_2">
+<excludes>
+<exclude ref="coverpage"/>
+</excludes>
+</resource>
+</resource>
+</leos>
+<formats>
+<legisWrite>
+<format>docx</format>
+</legisWrite>
+</formats>
+</importJob>
+</importOptions>

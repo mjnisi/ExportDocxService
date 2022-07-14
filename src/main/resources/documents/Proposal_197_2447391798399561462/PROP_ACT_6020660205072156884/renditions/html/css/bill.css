@@ -1,0 +1,2473 @@
+@charset "UTF-8";
+/**
+ * Copyright 2019 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill [leos\:editable=true],
+bill .leos-placeholder, bill article, bill article[leos\:origin='ec'] paragraph:not(.selectable-element-paragraph), bill article[leos\:origin='ec'] alinea, bill article[leos\:origin='ec'] subparagraph, bill article[leos\:origin='ec'] point, bill article[leos\:origin='ec'] indent, bill article[leos\:origin='ec'] heading, bill part heading, bill aknTitle heading, bill chapter heading, bill section heading, bill division heading, bill block, bill citations[leos\:origin='ec'] citation, bill recitals[leos\:origin='ec'] recital, bill level, bill level[leos\:origin='ec'] > content, bill level[leos\:origin='ec'] subparagraph, bill level[leos\:origin='ec'] point, bill level[leos\:origin='ec'] indent, bill level[leos\:origin='ec'] alinea, bill level[leos\:origin='ec'] heading, bill paragraph, bill paragraph[leos\:origin='ec'] subparagraph, bill paragraph[leos\:origin='ec'] point, bill paragraph[leos\:origin='ec'] indent, bill paragraph[leos\:origin='ec'] alinea, bill paragraph[leos\:origin='ec'] heading {
+  border: solid 1px transparent;
+  margin: 0 -5px;
+  padding: 0px 5px;
+  min-height: auto;
+}
+bill article.leos-editable-content, bill article[leos\:origin='ec'] .leos-editable-content, bill article[leos\:origin='ec'] paragraph.leos-editable-content, bill citations[leos\:origin='ec'] .leos-editable-content, bill recitals[leos\:origin='ec'] .leos-editable-content, bill level[leos\:origin='ec'] .leos-editable-content, bill paragraph[leos\:origin='ec'] .leos-editable-content, bill .leos-editable-content {
+  background-color: #FFFAFF;
+  border-color: #ADBDCE;
+}
+bill article[leos\:origin='ec'] subparagraph {
+  display: block;
+}
+bill article[leos\:origin='ec'] point {
+  padding: 0 5px 0px 45px;
+}
+bill article[leos\:origin='ec'] indent {
+  padding: 0 5px 0px 45px;
+}
+bill level[leos\:origin='ec'] num {
+  border: solid 1px transparent;
+  min-height: auto;
+  display: block;
+}
+bill level[leos\:origin='ec'] subparagraph {
+  display: block;
+}
+bill level[leos\:origin='ec'] point > list > point {
+  padding-left: 45px;
+}
+bill level[leos\:origin='ec'] indent {
+  padding-left: 45px;
+}
+bill level[leos\:origin='ec'] heading {
+  padding: 7px 0 0 5px;
+}
+bill paragraph[leos\:origin='ec'] subparagraph {
+  display: block;
+}
+bill paragraph[leos\:origin='ec'] point {
+  padding: 0 5px 0px 45px;
+}
+bill paragraph[leos\:origin='ec'] indent {
+  padding: 0 5px 0px 45px;
+}
+bill .leos-placeholder {
+  border-color: #ADBDCE;
+}
+bill .leos-actions, bill .leos-actions-icon {
+  position: absolute;
+  width: 20px;
+  user-select: none;
+  color: #0065A2;
+  grid-column: 1;
+}
+bill .leos-actions *, bill .leos-actions-icon * {
+  margin-top: 3px;
+  cursor: pointer;
+  display: none;
+  font-weight: normal;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill .leos-user-coedition {
+  position: absolute;
+  width: 20px;
+  margin-top: 8px;
+  user-select: none;
+  color: #0065A2;
+  display: inline-block;
+}
+bill .leos-user-coedition * {
+  font-weight: normal;
+}
+bill .leos-user-coedition-self-user {
+  color: #707070;
+}
+bill .leos-user-coedition div {
+  position: absolute;
+  padding: 3px 7px;
+  width: auto;
+  white-space: nowrap;
+  font-size: 12px;
+  font-family: "Open Sans";
+  color: white;
+  background-color: rgba(51, 51, 51, 0.9);
+  -webkit-box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  display: none;
+  z-index: 999999;
+}
+bill .leos-user-coedition a {
+  color: white;
+  text-decoration: underline;
+}
+bill .leos-user-coedition a:hover {
+  color: #7bd2f6;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill authorialNote[marker], .leos-toc-content .toc-content-area authorialNote[marker] {
+  display: inline-block;
+  font-size: 0.8em;
+  line-height: 0.8em;
+  vertical-align: baseline;
+  position: relative;
+  bottom: 0.5em;
+  cursor: pointer;
+  font-weight: bold;
+  color: blue;
+}
+bill authorialNote[marker]:before, .leos-toc-content .toc-content-area authorialNote[marker]:before {
+  content: attr(marker);
+  display: inline;
+}
+bill authorialNote[marker]:hover > aknp, .leos-toc-content .toc-content-area authorialNote[marker]:hover > aknp, bill authorialNote[marker]:hover > aknp:before, .leos-toc-content .toc-content-area authorialNote[marker]:hover > aknp:before, bill authorialNote[marker]:hover > p, .leos-toc-content .toc-content-area authorialNote[marker]:hover > p, bill authorialNote[marker]:hover > p:before, .leos-toc-content .toc-content-area authorialNote[marker]:hover > p:before {
+  display: block;
+}
+bill authorialNote[marker] > aknp, .leos-toc-content .toc-content-area authorialNote[marker] > aknp, bill authorialNote[marker] > p, .leos-toc-content .toc-content-area authorialNote[marker] > p {
+  display: none;
+  bottom: 0;
+  position: absolute;
+  color: black;
+  background-color: white;
+  border: blue 1px solid;
+  border-radius: 7px;
+  padding: 5px 15px;
+  left: -1.5em;
+  margin-bottom: 1.75em;
+  white-space: nowrap;
+}
+bill authorialNote[marker] > aknp:before, .leos-toc-content .toc-content-area authorialNote[marker] > aknp:before, bill authorialNote[marker] > p:before, .leos-toc-content .toc-content-area authorialNote[marker] > p:before {
+  bottom: 0;
+  position: absolute;
+  content: "";
+  border-top: 0.6em solid blue;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  left: 1.25em;
+  margin-bottom: -0.6em;
+}
+
+bill .cke_editable span .authorialnote, .leos-toc-content .toc-content-area .cke_editable span .authorialnote {
+  font-size: 0.8em;
+  line-height: 0.8em;
+  font-weight: bold;
+  color: blue;
+  vertical-align: super;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill .leos-authnote-table {
+  display: table;
+  word-break: break-all;
+  word-wrap: break-word;
+  table-layout: fixed;
+}
+bill .leos-authnote {
+  display: table-row;
+}
+bill .leos-authnote marker {
+  display: block;
+  font-size: 0.7em;
+  vertical-align: baseline;
+  position: relative;
+  bottom: 0.5em;
+  font-weight: bold;
+  color: blue;
+  float: left;
+  padding-bottom: 1em;
+}
+bill .leos-authnote text {
+  display: block;
+  word-break: keep-all;
+  margin-left: 1.2em;
+}
+bill .leos-authnote a.ref2link-generated {
+  text-decoration: underline;
+  color: black;
+}
+bill .leos-authnote[id] {
+  cursor: pointer;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+akomaNtoso {
+  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+  font-size: 12pt;
+  font-style: normal;
+  font-weight: normal;
+  text-align: justify;
+  word-wrap: break-word;
+  color: black;
+  line-height: 1.25em;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+akomaNtoso bill coverPage, .leos-toc {
+  position: relative;
+  display: block;
+  margin: 0.5cm 0.5cm 0.5cm 0.8%;
+  width: 21cm;
+  min-height: 29.7cm;
+  padding: 2cm 2.5cm;
+  box-shadow: 0 0 11px rgba(0, 0, 0, 0.5);
+  white-space: normal;
+  background-color: white;
+}
+
+akomaNtoso bill > :not(coverPage) {
+  display: block;
+  position: relative;
+  width: 21cm;
+  white-space: normal;
+  background-color: white;
+  padding-left: 2.5cm;
+  padding-right: 2.5cm;
+  margin-left: 0.8%;
+  margin-right: auto;
+  box-shadow: 0 11px 11px rgba(0, 0, 0, 0.5);
+}
+akomaNtoso bill > preface {
+  padding-top: 2cm;
+}
+akomaNtoso bill > :last-child {
+  padding-bottom: 2cm;
+  margin-bottom: 0.5cm;
+}
+akomaNtoso bill > mainBody {
+  min-height: calc(29.7cm - 125px);
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+akomaNtoso bill coverPage longTitle > aknp > *, bill longTitle > aknp > *, akomaNtoso bill coverPage longTitle > p > *, bill longTitle > p > *, akomaNtoso bill coverPage container[name=docLabel] > *, bill formula, bill block, bill alinea > content > aknP, .leos-toc-content .toc-content-area alinea > content > aknP, bill alinea > content > p, .leos-toc-content .toc-content-area alinea > content > p, bill .cke_editable li > ol > li > p, .leos-toc-content .toc-content-area .cke_editable li > ol > li > p, bill paragraph > content > aknP, .leos-toc-content .toc-content-area paragraph > content > aknP, bill paragraph > content > p, .leos-toc-content .toc-content-area paragraph > content > p, bill .cke_editable article > ol > li, .leos-toc-content .toc-content-area .cke_editable article > ol > li, bill subparagraph > content > aknP, .leos-toc-content .toc-content-area subparagraph > content > aknP, bill subparagraph > content > p, .leos-toc-content .toc-content-area subparagraph > content > p, bill .cke_editable ol > li > p, .leos-toc-content .toc-content-area .cke_editable ol > li > p, bill clause aknP, bill clause p, bill .cke_editable [data-akn-name=clause] p, .leos-toc-content .toc-content-area .cke_editable [data-akn-name=clause] p, bill citation > aknP, .leos-toc-content .toc-content-area citation > aknP, bill citation > p, .leos-toc-content .toc-content-area citation > p, bill .cke_editable p[data-akn-name="citation"], .leos-toc-content .toc-content-area .cke_editable p[data-akn-name="citation"], bill point > num, .leos-toc-content .toc-content-area point > num, bill indent > num, .leos-toc-content .toc-content-area indent > num, bill list point > num, .leos-toc-content .toc-content-area list point > num,
+bill list indent > num,
+.leos-toc-content .toc-content-area list indent > num, bill point > content > p, .leos-toc-content .toc-content-area point > content > p, bill indent > content > p, .leos-toc-content .toc-content-area indent > content > p, bill list point > content > p,
+bill list indent > content > p, bill point > content > aknP, .leos-toc-content .toc-content-area point > content > aknP, bill indent > content > aknP, .leos-toc-content .toc-content-area indent > content > aknP, bill list point > content > aknP,
+bill list indent > content > aknP, bill .cke_editable ol[data-akn-name=aknPointMandateOrderedList] > li, .leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknPointMandateOrderedList] > li,
+bill .cke_editable ol[data-akn-name=aknAlineaMandate] > li,
+.leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknAlineaMandate] > li,
+bill .cke_editable ol[data-akn-name=aknNumberedParagraphMandate] > li,
+.leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknNumberedParagraphMandate] > li,
+bill .cke_editable ol[data-akn-name=aknSubParagraphMandate] > li,
+.leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknSubParagraphMandate] > li,
+bill .cke_editable li > ol > li,
+.leos-toc-content .toc-content-area .cke_editable li > ol > li,
+bill .cke_editable li > ul > li,
+.leos-toc-content .toc-content-area .cke_editable li > ul > li, bill recital > num, .leos-toc-content .toc-content-area recital > num, bill recital > aknP, .leos-toc-content .toc-content-area recital > aknP, bill recital > p, .leos-toc-content .toc-content-area recital > p, bill .cke_editable p[data-akn-name="recital"], .leos-toc-content .toc-content-area .cke_editable p[data-akn-name="recital"], recitals intro > aknP, bill level > content > aknP, bill level > content > p, bill .cke_editable ol[data-akn-name="aknAnnexList"][data-akn-element="level"] > li, .leos-toc-content .toc-content-area .cke_editable ol[data-akn-name="aknAnnexList"][data-akn-element="level"] > li, bill .cke_editable p[data-akn-name="aknLevelNum"], .leos-toc-content .toc-content-area .cke_editable p[data-akn-name="aknLevelNum"], bill .cke_editable p[data-akn-name=aknContent], .leos-toc-content .toc-content-area .cke_editable p[data-akn-name=aknContent], bill .cke_editable table p[data-akn-name="aknParagraph"], .leos-toc-content .toc-content-area .cke_editable table p[data-akn-name="aknParagraph"], bill paragraph > num, .leos-toc-content .toc-content-area paragraph > num, bill level > num {
+  margin: 0;
+}
+
+akomaNtoso bill coverPage longTitle > aknp > *, bill longTitle > aknp > *, akomaNtoso bill coverPage longTitle > p > *, bill longTitle > p > *, akomaNtoso bill coverPage container[name=docLabel] > *, bill formula, bill block, bill alinea > content > aknP, .leos-toc-content .toc-content-area alinea > content > aknP, bill alinea > content > p, .leos-toc-content .toc-content-area alinea > content > p, bill .cke_editable li > ol > li > p, .leos-toc-content .toc-content-area .cke_editable li > ol > li > p, bill paragraph > content > aknP, .leos-toc-content .toc-content-area paragraph > content > aknP, bill paragraph > content > p, .leos-toc-content .toc-content-area paragraph > content > p, bill .cke_editable article > ol > li, .leos-toc-content .toc-content-area .cke_editable article > ol > li, bill subparagraph > content > aknP, .leos-toc-content .toc-content-area subparagraph > content > aknP, bill subparagraph > content > p, .leos-toc-content .toc-content-area subparagraph > content > p, bill .cke_editable ol > li > p, .leos-toc-content .toc-content-area .cke_editable ol > li > p, bill clause aknP, bill clause p, bill .cke_editable [data-akn-name=clause] p, .leos-toc-content .toc-content-area .cke_editable [data-akn-name=clause] p, bill citation > aknP, .leos-toc-content .toc-content-area citation > aknP, bill citation > p, .leos-toc-content .toc-content-area citation > p, bill .cke_editable p[data-akn-name="citation"], .leos-toc-content .toc-content-area .cke_editable p[data-akn-name="citation"], bill point > num, .leos-toc-content .toc-content-area point > num, bill indent > num, .leos-toc-content .toc-content-area indent > num, bill list point > num, .leos-toc-content .toc-content-area list point > num,
+bill list indent > num,
+.leos-toc-content .toc-content-area list indent > num, bill point > content > p, .leos-toc-content .toc-content-area point > content > p, bill indent > content > p, .leos-toc-content .toc-content-area indent > content > p, bill list point > content > p,
+bill list indent > content > p, bill point > content > aknP, .leos-toc-content .toc-content-area point > content > aknP, bill indent > content > aknP, .leos-toc-content .toc-content-area indent > content > aknP, bill list point > content > aknP,
+bill list indent > content > aknP, bill .cke_editable ol[data-akn-name=aknPointMandateOrderedList] > li, .leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknPointMandateOrderedList] > li,
+bill .cke_editable ol[data-akn-name=aknAlineaMandate] > li,
+.leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknAlineaMandate] > li,
+bill .cke_editable ol[data-akn-name=aknNumberedParagraphMandate] > li,
+.leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknNumberedParagraphMandate] > li,
+bill .cke_editable ol[data-akn-name=aknSubParagraphMandate] > li,
+.leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknSubParagraphMandate] > li,
+bill .cke_editable li > ol > li,
+.leos-toc-content .toc-content-area .cke_editable li > ol > li,
+bill .cke_editable li > ul > li,
+.leos-toc-content .toc-content-area .cke_editable li > ul > li, bill recital > num, .leos-toc-content .toc-content-area recital > num, bill recital > aknP, .leos-toc-content .toc-content-area recital > aknP, bill recital > p, .leos-toc-content .toc-content-area recital > p, bill .cke_editable p[data-akn-name="recital"], .leos-toc-content .toc-content-area .cke_editable p[data-akn-name="recital"], recitals intro > aknP, bill level > content > aknP, bill level > content > p, bill .cke_editable ol[data-akn-name="aknAnnexList"][data-akn-element="level"] > li, .leos-toc-content .toc-content-area .cke_editable ol[data-akn-name="aknAnnexList"][data-akn-element="level"] > li, bill .cke_editable p[data-akn-name="aknLevelNum"], .leos-toc-content .toc-content-area .cke_editable p[data-akn-name="aknLevelNum"], bill .cke_editable p[data-akn-name=aknContent], .leos-toc-content .toc-content-area .cke_editable p[data-akn-name=aknContent] {
+  padding-top: 6pt;
+  padding-bottom: 6pt;
+}
+
+.leos-toc-content .toc-content-area paragraph > num, .leos-toc-content .toc-content-area paragraph > content > aknP, .leos-toc-content .toc-content-area paragraph > content > p, .leos-toc-content .toc-content-area subparagraph > content > aknP, .leos-toc-content .toc-content-area subparagraph > content > p, .leos-toc-content .toc-content-area citation > aknP, .leos-toc-content .toc-content-area citation > p, .leos-toc-content .toc-content-area recital > num, .leos-toc-content .toc-content-area recital > aknP, .leos-toc-content .toc-content-area recital > p, .leos-toc-content .toc-content-area > div > num, .leos-toc-content .toc-content-area > div > aknP, .leos-toc-content .toc-content-area > div > p {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill .cke_editable *[contenteditable="false"], .leos-toc-content .toc-content-area .cke_editable *[contenteditable="false"] {
+  color: #808080;
+}
+bill .cke_editable *[contenteditable="true"], .leos-toc-content .toc-content-area .cke_editable *[contenteditable="true"] {
+  color: black;
+}
+
+bill .leos-editor-focus.cke_editable, .leos-toc-content .toc-content-area .leos-editor-focus.cke_editable {
+  background-color: #FFFAFD;
+  border-color: #ADBDCE;
+  margin-top: 40px;
+}
+bill .leos-editor-focus-double.cke_editable, .leos-toc-content .toc-content-area .leos-editor-focus-double.cke_editable {
+  background-color: #FFFAFD;
+  border-color: #ADBDCE;
+  margin-top: 80px;
+}
+
+bill .cke_editable .cke_widget_wrapper:hover .cke_widget_editable, .leos-toc-content .toc-content-area .cke_editable .cke_widget_wrapper:hover .cke_widget_editable, bill .cke_editable .cke_widget_wrapper:hover .cke_widget_element, .leos-toc-content .toc-content-area .cke_editable .cke_widget_wrapper:hover .cke_widget_element {
+  outline: 2px solid #AACCEE;
+}
+
+akomaNtoso *,
+akomaNtoso *:before,
+akomaNtoso *:after {
+  box-sizing: border-box;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+akomaNtoso bill coverPage longTitle, bill longTitle {
+  font-weight: bold;
+  color: #004494;
+  text-align: center;
+  font-size: 18pt;
+}
+akomaNtoso bill coverPage longTitle > aknp, bill longTitle > aknp, akomaNtoso bill coverPage longTitle > p, bill longTitle > p {
+  text-decoration: none;
+  display: block;
+}
+akomaNtoso bill coverPage longTitle > aknp > *, bill longTitle > aknp > *, akomaNtoso bill coverPage longTitle > p > *, bill longTitle > p > * {
+  display: block;
+}
+akomaNtoso bill coverPage longTitle > aknp > docstage, bill longTitle > aknp > docstage, akomaNtoso bill coverPage longTitle > p > docstage, bill longTitle > p > docstage {
+  font-weight: normal;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill table, .leos-toc-content .toc-content-area table {
+  border-collapse: collapse;
+  border-color: grey;
+  empty-cells: show;
+  margin-left: auto;
+  margin-right: auto;
+  display: table;
+}
+bill table aknP, .leos-toc-content .toc-content-area table aknP,
+bill table p,
+.leos-toc-content .toc-content-area table p {
+  display: block;
+}
+bill table > caption, .leos-toc-content .toc-content-area table > caption {
+  display: table-caption;
+  text-align: center;
+}
+bill table * > td, .leos-toc-content .toc-content-area table * > td, bill table th, .leos-toc-content .toc-content-area table th {
+  border: 1px solid grey;
+}
+bill table * > tr:first-child th, .leos-toc-content .toc-content-area table * > tr:first-child th, bill table tr:first-child td, .leos-toc-content .toc-content-area table tr:first-child td {
+  border-top: 1px solid black;
+}
+bill table * > tr:last-child th, .leos-toc-content .toc-content-area table * > tr:last-child th, bill table tr:last-child td, .leos-toc-content .toc-content-area table tr:last-child td {
+  border-bottom: 1px solid black;
+}
+bill table * > tr td:first-child, .leos-toc-content .toc-content-area table * > tr td:first-child, bill table tr th:first-child, .leos-toc-content .toc-content-area table tr th:first-child {
+  border-left: 1px solid black;
+}
+bill table * > tr td:last-child, .leos-toc-content .toc-content-area table * > tr td:last-child, bill table tr th:last-child, .leos-toc-content .toc-content-area table tr th:last-child {
+  border-right: 1px solid black;
+}
+bill table > tr, .leos-toc-content .toc-content-area table > tr {
+  display: table-row;
+}
+bill table > tr:first-child, .leos-toc-content .toc-content-area table > tr:first-child {
+  display: table-header-group;
+  font-weight: bold;
+}
+bill table td, .leos-toc-content .toc-content-area table td, bill table th, .leos-toc-content .toc-content-area table th {
+  display: table-cell;
+}
+bill table td > aknP, .leos-toc-content .toc-content-area table td > aknP, bill table td > p, .leos-toc-content .toc-content-area table td > p, bill table th > aknP, .leos-toc-content .toc-content-area table th > aknP, bill table th > p, .leos-toc-content .toc-content-area table th > p {
+  padding: 5px;
+}
+
+bill paragraph > content > table, .leos-toc-content .toc-content-area paragraph > content > table, bill point > content > table, .leos-toc-content .toc-content-area point > content > table, bill indent > content > table, .leos-toc-content .toc-content-area indent > content > table, bill list point > content > table,
+bill list indent > content > table, bill level > content > table {
+  margin-top: 12pt;
+  margin-bottom: 12pt;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+akomaNtoso bill coverPage {
+  display: block;
+  padding: 0cm 0cm;
+}
+akomaNtoso bill coverPage img {
+  width: 794px;
+}
+akomaNtoso bill coverPage container[name=language] {
+  font-weight: bold;
+  position: absolute;
+  font-family: "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 24pt;
+  bottom: 2cm;
+}
+akomaNtoso bill coverPage container[name=language]:before {
+  content: attr(data-lang);
+  float: left;
+  margin-left: -1.2cm;
+}
+akomaNtoso bill coverPage container[name=language]:after {
+  content: attr(data-lang);
+  float: right;
+  margin-left: 15.8cm;
+}
+akomaNtoso bill coverPage container[name=logo] {
+  padding-bottom: 4.65cm;
+  display: inline-block;
+}
+akomaNtoso bill coverPage container[name=docLabel] > * {
+  display: block;
+  font-weight: bold;
+  text-align: center;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill .guidance-green-block {
+  display: block;
+  color: green;
+}
+bill .guidance-green-inline {
+  display: inline;
+  color: green;
+}
+bill citation guidance.guidance-green-block {
+  text-align: right;
+  padding-right: 100px;
+}
+bill recital guidance.guidance-green-block {
+  text-align: left;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill .leos-content-new:not([leos\:origin]), bill .leos-content-new:not([leos\:origin]) *, bill .leos-content-new[leos\:softaction="add"] [leos\:origin="ls"]:not(span):not(list), bill .leos-content-new[leos\:softaction="add"] num:not([leos\:origin="ec"]), bill .leos-content-new[leos\:softaction="move_from"] num[leos\:origin="ls"], bill .leos-content-new[leos\:softaction="move_from"] .leos-content-new[leos\:softaction="add"] *, bill .leos-content-new-cn[leos\:softaction="add"] [leos\:origin="cn"]:not(span):not(list), bill .leos-content-new-cn[leos\:softaction="add"] num:not([leos\:origin="ec"]), bill .leos-content-new-cn[leos\:softaction="move_from"] num[leos\:origin="cn"], bill .leos-content-new-cn[leos\:softaction="move_from"] .leos-content-new-cn[leos\:softaction="add"] *, span.leos-content-new-cn, span.leos-content-new-cn * {
+  text-decoration: underline;
+}
+
+bill .leos-content-removed-cn, bill .leos-content-removed-cn[leos\:softaction="del"], bill .leos-content-removed-cn *, bill .leos-content-removed-cn[leos\:softaction="del"] *, bill subparagraph.leos-content-new-cn[leos\:indent-origin-num]::before,
+bill alinea.leos-content-new-cn[leos\:indent-origin-num]::before,
+bill paragraph.leos-content-new-cn[leos\:indent-origin-num][leos\:indent-unumbered-paragraph]::before, bill .leos-content-new-cn num.leos-content-removed-cn, bill .leos-content-new-cn[leos\:softaction="move_from"] num.leos-content-removed-cn, bill .leos-content-new-cn[leos\:softaction="move_from"] .leos-content-removed-cn[leos\:softaction="del"], bill .leos-content-new-cn[leos\:softaction="move_from"] .leos-content-removed-cn[leos\:softaction="del"] :not([leos\:origin="cn"]):not(span), bill .leos-content-new-cn[leos\:softaction="move_from"] .leos-content-removed-cn[leos\:softaction="del"] num[leos\:origin="ec"] {
+  text-decoration: underline line-through;
+}
+
+bill .leos-content-removed-cn, bill .leos-content-removed-cn[leos\:softaction="del"], bill .leos-content-removed-cn *, bill .leos-content-removed-cn[leos\:softaction="del"] *, bill subparagraph.leos-content-new-cn[leos\:indent-origin-num]::before,
+bill alinea.leos-content-new-cn[leos\:indent-origin-num]::before,
+bill paragraph.leos-content-new-cn[leos\:indent-origin-num][leos\:indent-unumbered-paragraph]::before, bill .leos-content-new-cn num.leos-content-removed-cn, bill .leos-content-new-cn[leos\:softaction="move_from"] num.leos-content-removed-cn, bill .leos-content-new-cn[leos\:softaction="move_from"] .leos-content-removed-cn[leos\:softaction="del"], bill .leos-content-new-cn[leos\:softaction="move_from"] .leos-content-removed-cn[leos\:softaction="del"] :not([leos\:origin="cn"]):not(span), bill .leos-content-new-cn[leos\:softaction="move_from"] .leos-content-removed-cn[leos\:softaction="del"] num[leos\:origin="ec"], bill .leos-content-new-cn[leos\:softaction="add"] [leos\:origin="cn"]:not(span):not(list), bill .leos-content-new-cn[leos\:softaction="add"] num:not([leos\:origin="ec"]), bill .leos-content-new-cn[leos\:softaction="move_from"] num[leos\:origin="cn"], bill .leos-content-new-cn[leos\:softaction="move_from"] .leos-content-new-cn[leos\:softaction="add"] *, span.leos-content-new-cn, span.leos-content-new-cn * {
+  font-weight: bold;
+  color: black;
+}
+
+table.leos-content-new-cn, tr.leos-content-new-cn, td.leos-content-new-cn, th.leos-content-new-cn, table.leos-content-removed-cn, tr.leos-content-removed-cn, td.leos-content-removed-cn, th.leos-content-removed-cn, .leos-content-removed-cn table, .leos-content-new-cn table {
+  border: 2px solid #000000;
+  background-color: #FFFFFF;
+}
+
+bill .leos-content-removed, bill .leos-content-removed *, bill .leos-content-removed[leos\:softaction="move_to"], bill .leos-content-removed[leos\:softaction="del"], bill .leos-content-removed[leos\:softaction="move_to"] *, bill .leos-content-removed[leos\:softaction="del"] *, bill .leos-content-new[leos\:softaction="move_from"] .leos-content-removed[leos\:softaction="del"], bill .leos-content-new[leos\:softaction="move_from"] .leos-content-removed[leos\:softaction="del"] :not([leos\:origin="ls"]):not(span), bill .leos-content-new[leos\:softaction="move_from"] .leos-content-removed[leos\:softaction="del"] num[leos\:origin="ec"], bill .leos-content-new[leos\:softaction="move_from"] span.leos-content-removed, span.leos-content-removed {
+  text-decoration: line-through;
+  color: #FF0000;
+}
+
+bill .leos-content-new:not([leos\:origin]), bill .leos-content-new:not([leos\:origin]) *, bill .leos-content-new[leos\:softaction="add"] [leos\:origin="ls"]:not(span):not(list), bill .leos-content-new[leos\:softaction="add"] num:not([leos\:origin="ec"]), bill .leos-content-new[leos\:softaction="move_from"] num[leos\:origin="ls"], bill .leos-content-new[leos\:softaction="move_from"] .leos-content-new[leos\:softaction="add"] * {
+  color: #008000;
+}
+
+bill .leos-content-new[leos\:softaction="move_from"] *:not([leos\:origin="ls"])
+:not(span)
+:not(heading)
+:not(authorialnote)
+:not(.leos-content-new *), bill .leos-content-new-cn[leos\:softaction="move_from"] *:not([leos\:origin="cn"])
+:not(span)
+:not(heading)
+:not(authorialnote)
+:not(.leos-content-new-cn *) {
+  font-weight: normal;
+  text-decoration: none;
+}
+
+bill subparagraph.leos-content-new-cn[leos\:indent-origin-num]::before,
+bill alinea.leos-content-new-cn[leos\:indent-origin-num]::before,
+bill paragraph.leos-content-new-cn[leos\:indent-origin-num][leos\:indent-unumbered-paragraph]::before, bill .leos-content-new-cn num.leos-content-removed-cn, bill .leos-content-new-cn[leos\:softaction="move_from"] num.leos-content-removed-cn, div.leos-document-view div.leos-double-comparison-content bill *[leos\:origin="ec"] num.leos-double-compare-removed-intermediate, div.leos-document-view div.leos-double-comparison-content bill *[leos\:origin="ec"] num.leos-double-compare-removed-original, div.leos-document-view div.leos-double-comparison-content bill subparagraph.leos-double-compare-added-intermediate[leos\:indent-origin-num]::before,
+div.leos-document-view div.leos-double-comparison-content bill alinea.leos-double-compare-added-intermediate[leos\:indent-origin-num]::before,
+div.leos-document-view div.leos-double-comparison-content bill paragraph.leos-double-compare-added-intermediate[leos\:indent-origin-num][leos\:indent-unumbered-paragraph]::before, div.leos-document-view div.leos-double-comparison-content bill subparagraph.leos-double-compare-added-original[leos\:indent-origin-num]::before,
+div.leos-document-view div.leos-double-comparison-content bill alinea.leos-double-compare-added-original[leos\:indent-origin-num]::before,
+div.leos-document-view div.leos-double-comparison-content bill paragraph.leos-double-compare-added-original[leos\:indent-origin-num][leos\:indent-unumbered-paragraph]::before, div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] num.leos-double-compare-removed-intermediate, div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] num.leos-double-compare-removed-original,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] num.leos-double-compare-removed-intermediate,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] num.leos-double-compare-removed-original,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] num.leos-double-compare-removed-intermediate,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] num.leos-double-compare-removed-original, div.leos-document-view div.leos-doc-content bill .leos-content-soft-new num.leos-content-soft-removed, subparagraph.leos-content-soft-new[leos\:indent-origin-num]::before,
+alinea.leos-content-soft-new[leos\:indent-origin-num]::before,
+paragraph.leos-content-soft-new[leos\:indent-origin-num][leos\:indent-unumbered-paragraph]::before {
+  padding-top: 6pt;
+  border: 0pt;
+  float: left;
+}
+
+bill .leos-content-new[leos\:softaction="move_from"] *:not([leos\:origin="ls"]):not(span) {
+  color: black;
+  text-decoration-color: white;
+}
+bill .leos-content-removed-cn[leos\:softaction="move_to"] num[leos\:origin="cn"], bill .leos-content-removed-cn[leos\:softaction="move_to"] num[leos\:origin="ec"] {
+  padding-bottom: 0;
+}
+bill subparagraph.leos-content-new-cn[leos\:indent-origin-num]::before,
+bill alinea.leos-content-new-cn[leos\:indent-origin-num]::before,
+bill paragraph.leos-content-new-cn[leos\:indent-origin-num][leos\:indent-unumbered-paragraph]::before {
+  content: attr(leos\:indent-origin-num);
+}
+bill .leos-content-new[leos\:softaction="move_from"] num[leos\:origin="ec"] {
+  padding-bottom: 0;
+}
+bill .leos-content-new-cn[leos\:softaction="move_from"] num[leos\:origin="cn"], bill .leos-content-new-cn[leos\:softaction="move_from"] num[leos\:origin="ec"] {
+  padding-bottom: 0;
+}
+
+bill subparagraph.leos-content-new-cn[leos\:indent-origin-num]::before {
+  margin-right: -20pt;
+}
+
+doc subparagraph.leos-content-new-cn[leos\:indent-origin-num]::before {
+  margin-left: -20pt;
+}
+
+span.leos-content-new-cn authorialnote {
+  color: blue;
+}
+
+point[leos\:softaction="move_from"] > num:first-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.leos-content-modified {
+  display: block;
+}
+
+.leos-marker-content-removed, .leos-marker-content-added {
+  visibility: hidden;
+}
+
+.leos-content-new img {
+  border: 3px solid #008000 !important;
+}
+
+.leos-content-new-cn img {
+  border: 3px solid #000000 !important;
+}
+
+.leos-content-removed img {
+  border: 3px solid #FF0000 !important;
+}
+
+.leos-content-removed-cn img {
+  filter: grayscale(100%);
+  opacity: 0.3;
+}
+
+.leos-authnote-table span.leos-content-new-cn * {
+  font-weight: bold;
+}
+.leos-authnote-table span.leos-content-new-cn * a.ref2link-generated {
+  text-decoration: underline;
+  color: black;
+}
+
+.leos-authnote marker span.leos-content-new-cn, .leos-authnote marker span.leos-content-removed-cn {
+  font-weight: bold;
+  color: blue;
+}
+.leos-authnote marker span.leos-content-removed-cn {
+  text-decoration: underline line-through;
+}
+
+table.leos-content-new, tr.leos-content-new, td.leos-content-new, th.leos-content-new {
+  border: 1px solid #008000;
+  background-color: #DEFDDB;
+}
+table.leos-content-removed, tr.leos-content-removed, td.leos-content-removed, th.leos-content-removed {
+  border: 1px solid #FF0000;
+  background-color: #FFD5D6;
+}
+
+.leos-content-removed table {
+  border: 1px solid #FF0000;
+  background-color: #FFD5D6;
+}
+
+.leos-content-new table {
+  border: 1px solid #008000;
+  background-color: #DEFDDB;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+div.leos-document-view div.leos-double-comparison-content bill *[leos\:origin="ec"] num.leos-double-compare-removed-intermediate, div.leos-document-view div.leos-double-comparison-content bill subparagraph.leos-double-compare-added-intermediate[leos\:indent-origin-num]::before,
+div.leos-document-view div.leos-double-comparison-content bill alinea.leos-double-compare-added-intermediate[leos\:indent-origin-num]::before,
+div.leos-document-view div.leos-double-comparison-content bill paragraph.leos-double-compare-added-intermediate[leos\:indent-origin-num][leos\:indent-unumbered-paragraph]::before, div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="del"] :not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="add"] :not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="move_from"] :not(span), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] :not(span):not(authorialnote), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="add"] .leos-double-compare-removed-intermediate,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="add"] .leos-double-compare-removed-intermediate,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="del"] .leos-double-compare-removed-intermediate, div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="add"] .leos-double-compare-removed-intermediate[leos\:softaction="del"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="add"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="del"] .leos-double-compare-removed-intermediate[leos\:softaction="del"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="del"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] num.leos-double-compare-removed-intermediate, div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] num.leos-double-compare-removed-original,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] num.leos-double-compare-removed-intermediate,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] num.leos-double-compare-removed-original,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] num.leos-double-compare-removed-intermediate,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] num.leos-double-compare-removed-original, div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="del"] :not([leos\:origin="cn"]):not(span), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="del"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="del"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="del"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="del"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="del"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-removed-intermediate, div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-removed-intermediate *, table.leos-double-compare-removed-intermediate, tr.leos-double-compare-removed-intermediate, td.leos-double-compare-removed-intermediate, th.leos-double-compare-removed-intermediate, div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed[leos\:softaction="del"] :not([leos\:origin="cn"]):not(span), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed[leos\:softaction="del"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-original[leos\:softaction="del"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-original[leos\:softaction="del"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-original[leos\:softaction="add"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-original[leos\:softaction="add"] num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill *[leos\:origin="ec"] num.leos-double-compare-removed-original, div.leos-document-view div.leos-double-comparison-content bill subparagraph.leos-double-compare-added-original[leos\:indent-origin-num]::before,
+div.leos-document-view div.leos-double-comparison-content bill alinea.leos-double-compare-added-original[leos\:indent-origin-num]::before,
+div.leos-document-view div.leos-double-comparison-content bill paragraph.leos-double-compare-added-original[leos\:indent-origin-num][leos\:indent-unumbered-paragraph]::before, div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed[leos\:softaction="move_to"] :not(span):not(authorialnote), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed[leos\:softaction="move_to"] num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed[leos\:softaction="move_to"] num[leos\:origin="ec"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-original[leos\:softaction="move_to"] :not(span):not(authorialnote),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-original[leos\:softaction="move_to"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-original[leos\:softaction="move_to"] num[leos\:origin="ec"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] num[leos\:origin="ec"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed[leos\:softaction="move_to"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-original[leos\:softaction="move_to"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="move_to"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="add"] .leos-double-compare-removed-original,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="add"] .leos-double-compare-removed-original,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="del"] .leos-double-compare-removed-original, div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-original :not([leos\:origin="cn"]):not(span), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-original num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-original :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-original num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] .leos-double-compare-removed-original :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] .leos-double-compare-removed-original num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-original[leos\:softaction="del"] :not([leos\:origin="cn"]):not(span), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-original[leos\:softaction="del"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-original[leos\:softaction="move_to"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-original[leos\:softaction="move_to"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-original[leos\:softaction="del"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-original[leos\:softaction="del"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-original[leos\:softaction="move_to"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-original[leos\:softaction="move_to"] num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-removed, div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-removed-original, div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-removed *, div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-removed-original *, table.leos-double-compare-removed-original, tr.leos-double-compare-removed-original, td.leos-double-compare-removed-original, th.leos-double-compare-removed-original, div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="add"] :not([leos\:origin="ec"]):not(span), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="add"] num[leos\:origin="ec"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="del"] :not([leos\:origin="ec"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="del"] num[leos\:origin="ec"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="undelete"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="undelete"] :not(span):not(authorialnote), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-added-intermediate, div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-added-intermediate *, table.leos-double-compare-added-intermediate, tr.leos-double-compare-added-intermediate, td.leos-double-compare-added-intermediate, th.leos-double-compare-added-intermediate, div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="add"] :not([leos\:origin="ec"]):not(span), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="add"] num[leos\:origin="ec"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="add"] :not([leos\:origin="ec"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="add"] num[leos\:origin="ec"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="del"] :not([leos\:origin="ec"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="del"] num[leos\:origin="ec"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-added, div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-added-original, div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-added *, div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-added-original *, table.leos-double-compare-added-original, tr.leos-double-compare-added-original, td.leos-double-compare-added-original, th.leos-double-compare-added-original {
+  color: black;
+}
+
+div.leos-document-view div.leos-double-comparison-content bill *[leos\:origin="ec"] num.leos-double-compare-removed-intermediate, div.leos-document-view div.leos-double-comparison-content bill subparagraph.leos-double-compare-added-intermediate[leos\:indent-origin-num]::before,
+div.leos-document-view div.leos-double-comparison-content bill alinea.leos-double-compare-added-intermediate[leos\:indent-origin-num]::before,
+div.leos-document-view div.leos-double-comparison-content bill paragraph.leos-double-compare-added-intermediate[leos\:indent-origin-num][leos\:indent-unumbered-paragraph]::before, div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="del"] :not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="add"] :not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="move_from"] :not(span), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] :not(span):not(authorialnote), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="add"] .leos-double-compare-removed-intermediate,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="add"] .leos-double-compare-removed-intermediate,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="del"] .leos-double-compare-removed-intermediate, div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="add"] .leos-double-compare-removed-intermediate[leos\:softaction="del"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="add"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="del"] .leos-double-compare-removed-intermediate[leos\:softaction="del"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="del"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] num.leos-double-compare-removed-intermediate, div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] num.leos-double-compare-removed-original,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] num.leos-double-compare-removed-intermediate,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] num.leos-double-compare-removed-original,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] num.leos-double-compare-removed-intermediate,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] num.leos-double-compare-removed-original, div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="del"] :not([leos\:origin="cn"]):not(span), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="del"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="del"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="del"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="del"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="del"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-removed-intermediate, div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-removed-intermediate *, table.leos-double-compare-removed-intermediate, tr.leos-double-compare-removed-intermediate, td.leos-double-compare-removed-intermediate, th.leos-double-compare-removed-intermediate, div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed[leos\:softaction="del"] :not([leos\:origin="cn"]):not(span), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed[leos\:softaction="del"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-original[leos\:softaction="del"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-original[leos\:softaction="del"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-original[leos\:softaction="add"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-original[leos\:softaction="add"] num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill *[leos\:origin="ec"] num.leos-double-compare-removed-original, div.leos-document-view div.leos-double-comparison-content bill subparagraph.leos-double-compare-added-original[leos\:indent-origin-num]::before,
+div.leos-document-view div.leos-double-comparison-content bill alinea.leos-double-compare-added-original[leos\:indent-origin-num]::before,
+div.leos-document-view div.leos-double-comparison-content bill paragraph.leos-double-compare-added-original[leos\:indent-origin-num][leos\:indent-unumbered-paragraph]::before, div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed[leos\:softaction="move_to"] :not(span):not(authorialnote), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed[leos\:softaction="move_to"] num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed[leos\:softaction="move_to"] num[leos\:origin="ec"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-original[leos\:softaction="move_to"] :not(span):not(authorialnote),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-original[leos\:softaction="move_to"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-original[leos\:softaction="move_to"] num[leos\:origin="ec"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] num[leos\:origin="ec"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed[leos\:softaction="move_to"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-original[leos\:softaction="move_to"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="move_to"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="add"] .leos-double-compare-removed-original,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="add"] .leos-double-compare-removed-original,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="del"] .leos-double-compare-removed-original, div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-original :not([leos\:origin="cn"]):not(span), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-original num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-original :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-original num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] .leos-double-compare-removed-original :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] .leos-double-compare-removed-original num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-original[leos\:softaction="del"] :not([leos\:origin="cn"]):not(span), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-original[leos\:softaction="del"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-original[leos\:softaction="move_to"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-original[leos\:softaction="move_to"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-original[leos\:softaction="del"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-original[leos\:softaction="del"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-original[leos\:softaction="move_to"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-original[leos\:softaction="move_to"] num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-removed, div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-removed-original, div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-removed *, div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-removed-original *, table.leos-double-compare-removed-original, tr.leos-double-compare-removed-original, td.leos-double-compare-removed-original, th.leos-double-compare-removed-original {
+  text-decoration: line-through;
+  font-weight: bold;
+}
+
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="add"] :not([leos\:origin="ec"]):not(span), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="add"] num[leos\:origin="ec"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="del"] :not([leos\:origin="ec"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="del"] num[leos\:origin="ec"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="undelete"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="undelete"] :not(span):not(authorialnote), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-added-intermediate, div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-added-intermediate *, table.leos-double-compare-added-intermediate, tr.leos-double-compare-added-intermediate, td.leos-double-compare-added-intermediate, th.leos-double-compare-added-intermediate, div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="add"] :not([leos\:origin="ec"]):not(span), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="add"] num[leos\:origin="ec"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="add"] :not([leos\:origin="ec"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="add"] num[leos\:origin="ec"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="del"] :not([leos\:origin="ec"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="del"] num[leos\:origin="ec"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-added, div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-added-original, div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-added *, div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-added-original *, table.leos-double-compare-added-original, tr.leos-double-compare-added-original, td.leos-double-compare-added-original, th.leos-double-compare-added-original {
+  font-weight: bold;
+}
+
+div.leos-document-view div.leos-double-comparison-content bill *[leos\:origin="ec"] num.leos-double-compare-removed-intermediate, div.leos-document-view div.leos-double-comparison-content bill subparagraph.leos-double-compare-added-intermediate[leos\:indent-origin-num]::before,
+div.leos-document-view div.leos-double-comparison-content bill alinea.leos-double-compare-added-intermediate[leos\:indent-origin-num]::before,
+div.leos-document-view div.leos-double-comparison-content bill paragraph.leos-double-compare-added-intermediate[leos\:indent-origin-num][leos\:indent-unumbered-paragraph]::before, div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="del"] :not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="add"] :not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="move_from"] :not(span), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] :not(span):not(authorialnote), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="add"] .leos-double-compare-removed-intermediate,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="add"] .leos-double-compare-removed-intermediate,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="del"] .leos-double-compare-removed-intermediate, div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="add"] .leos-double-compare-removed-intermediate[leos\:softaction="del"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="add"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="del"] .leos-double-compare-removed-intermediate[leos\:softaction="del"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="del"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] num.leos-double-compare-removed-intermediate, div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] num.leos-double-compare-removed-original,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] num.leos-double-compare-removed-intermediate,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] num.leos-double-compare-removed-original,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] num.leos-double-compare-removed-intermediate,
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] num.leos-double-compare-removed-original, div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="del"] :not([leos\:origin="cn"]):not(span), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="del"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="del"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="del"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="del"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="del"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] :not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-removed-intermediate, div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-removed-intermediate *, table.leos-double-compare-removed-intermediate, tr.leos-double-compare-removed-intermediate, td.leos-double-compare-removed-intermediate, th.leos-double-compare-removed-intermediate {
+  text-decoration: line-through underline solid;
+}
+
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="add"] :not([leos\:origin="ec"]):not(span), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="add"] num[leos\:origin="ec"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="del"] :not([leos\:origin="ec"]):not(span),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="del"] num[leos\:origin="ec"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="undelete"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="undelete"] :not(span):not(authorialnote), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-added-intermediate, div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-added-intermediate *, table.leos-double-compare-added-intermediate, tr.leos-double-compare-added-intermediate, td.leos-double-compare-added-intermediate, th.leos-double-compare-added-intermediate {
+  text-decoration: underline solid;
+}
+
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] *:not([leos\:origin="cn"])
+:not(span)
+:not(heading)
+:not(authorialnote)
+:not(.leos-double-compare-added-original *),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] *:not([leos\:origin="cn"])
+:not(span)
+:not(heading)
+:not(authorialnote)
+:not(.leos-double-compare-added-original *), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] *:not([leos\:origin="cn"])
+:not(span)
+:not(heading)
+:not(authorialnote)
+:not(.leos-double-compare-added-intermediate *) {
+  font-weight: normal;
+  text-decoration: underline white solid;
+}
+
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed[leos\:softaction="del"] num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed[leos\:softaction="del"] num[leos\:origin="ec"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-original[leos\:softaction="del"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-original[leos\:softaction="del"] num[leos\:origin="ec"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-original[leos\:softaction="add"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-original[leos\:softaction="add"] num[leos\:origin="ec"] {
+  padding-bottom: 0;
+}
+div.leos-document-view div.leos-double-comparison-content bill subparagraph.leos-double-compare-added-intermediate[leos\:indent-origin-num]::before,
+div.leos-document-view div.leos-double-comparison-content bill alinea.leos-double-compare-added-intermediate[leos\:indent-origin-num]::before,
+div.leos-document-view div.leos-double-comparison-content bill paragraph.leos-double-compare-added-intermediate[leos\:indent-origin-num][leos\:indent-unumbered-paragraph]::before {
+  content: attr(leos\:indent-origin-num);
+}
+div.leos-document-view div.leos-double-comparison-content bill subparagraph.leos-double-compare-added-original[leos\:indent-origin-num]::before,
+div.leos-document-view div.leos-double-comparison-content bill alinea.leos-double-compare-added-original[leos\:indent-origin-num]::before,
+div.leos-document-view div.leos-double-comparison-content bill paragraph.leos-double-compare-added-original[leos\:indent-origin-num][leos\:indent-unumbered-paragraph]::before {
+  content: attr(leos\:indent-origin-num);
+}
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="del"] num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="del"] num[leos\:origin="ec"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="add"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="add"] num[leos\:origin="ec"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="move_from"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="move_from"] num[leos\:origin="ec"] {
+  padding-bottom: 0;
+}
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] num[leos\:origin="ec"] {
+  padding-bottom: 0;
+}
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="add"] num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="add"] num[leos\:origin="ec"] {
+  padding-bottom: 0;
+}
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed[leos\:softaction="move_to"] *:not(span):not(authorialnote), div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed[leos\:softaction="move_to"] num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed[leos\:softaction="move_to"] num[leos\:origin="ec"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-original[leos\:softaction="move_to"] *:not(span):not(authorialnote),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-original[leos\:softaction="move_to"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-original[leos\:softaction="move_to"] num[leos\:origin="ec"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] *:not(span):not(authorialnote),
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-removed-intermediate[leos\:softaction="move_to"] num[leos\:origin="ec"] {
+  padding-bottom: 0;
+}
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="add"] num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="add"] num[leos\:origin="ec"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="add"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="add"] num[leos\:origin="ec"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="del"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="del"] num[leos\:origin="ec"] {
+  padding-bottom: 0;
+}
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="add"] num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="add"] num[leos\:origin="ec"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="del"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="del"] num[leos\:origin="ec"] {
+  padding-bottom: 0;
+}
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] num[leos\:origin="ec"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] num[leos\:origin="ec"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-intermediate[leos\:softaction="move_from"] num[leos\:origin="ec"] {
+  padding-bottom: 0;
+}
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] num[leos\:origin="cn"], div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added[leos\:softaction="move_from"] num[leos\:origin="ec"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-added-original[leos\:softaction="move_from"] num[leos\:origin="ec"] {
+  padding-bottom: 0;
+}
+div.leos-document-view div.leos-double-comparison-content bill .leos-double-compare-retain-original {
+  text-decoration: underline;
+}
+div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-added-original authorialnote,
+div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-added-intermediate authorialnote,
+div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-removed-original authorialnote,
+div.leos-document-view div.leos-double-comparison-content bill span.leos-double-compare-removed-intermediate authorialnote {
+  color: blue;
+}
+div.leos-document-view div.leos-double-comparison-content bill .leos-authnote-table span.leos-double-compare-added-original *,
+div.leos-document-view div.leos-double-comparison-content bill .leos-authnote-table span.leos-double-compare-added-intermediate * {
+  font-weight: bold;
+}
+div.leos-document-view div.leos-double-comparison-content bill .leos-authnote-table span.leos-double-compare-added-original * a.ref2link-generated,
+div.leos-document-view div.leos-double-comparison-content bill .leos-authnote-table span.leos-double-compare-added-intermediate * a.ref2link-generated {
+  text-decoration: underline;
+  color: black;
+}
+div.leos-document-view div.leos-double-comparison-content bill .leos-authnote marker span.leos-double-compare-added-original,
+div.leos-document-view div.leos-double-comparison-content bill .leos-authnote marker span.leos-double-compare-added-intermediate,
+div.leos-document-view div.leos-double-comparison-content bill .leos-authnote marker span.leos-double-compare-removed-original,
+div.leos-document-view div.leos-double-comparison-content bill .leos-authnote marker span.leos-double-compare-removed-intermediate {
+  font-weight: bold;
+  color: blue;
+}
+div.leos-document-view div.leos-double-comparison-content bill .leos-authnote marker span.leos-double-compare-added-intermediate {
+  text-decoration: underline;
+}
+div.leos-document-view div.leos-double-comparison-content bill .leos-authnote marker span.leos-double-compare-removed-intermediate {
+  text-decoration: line-through underline;
+}
+div.leos-document-view div.leos-double-comparison-content bill .leos-authnote marker span.leos-double-compare-removed-original {
+  text-decoration: line-through;
+}
+
+bill subparagraph.leos-double-compare-added-intermediate[leos\:indent-origin-num]::before {
+  margin-right: -20pt;
+}
+bill subparagraph.leos-double-compare-added-original[leos\:indent-origin-num]::before {
+  margin-right: -20pt;
+}
+
+doc subparagraph.leos-double-compare-added-intermediate[leos\:indent-origin-num]::before {
+  margin-left: -20pt;
+}
+doc subparagraph.leos-double-compare-added-original[leos\:indent-origin-num]::before {
+  margin-left: -20pt;
+}
+
+.leos-double-compare-added-original img, .leos-double-compare-added-intermediate img {
+  border: 3px solid !important;
+}
+
+.leos-double-compare-removed-original img, .leos-double-compare-removed-intermediate img {
+  border: 1px dotted !important;
+}
+
+table.leos-double-compare-added-original, tr.leos-double-compare-added-original, td.leos-double-compare-added-original, th.leos-double-compare-added-original {
+  border: 3px solid;
+}
+table.leos-double-compare-removed-original, tr.leos-double-compare-removed-original, td.leos-double-compare-removed-original, th.leos-double-compare-removed-original {
+  border: 2px solid;
+}
+table.leos-double-compare-added-intermediate, tr.leos-double-compare-added-intermediate, td.leos-double-compare-added-intermediate, th.leos-double-compare-added-intermediate {
+  border: 3px solid;
+}
+table.leos-double-compare-removed-intermediate, tr.leos-double-compare-removed-intermediate, td.leos-double-compare-removed-intermediate, th.leos-double-compare-removed-intermediate {
+  border: 2px solid;
+}
+
+.leos-double-compare-removed-intermediate table, .leos-double-compare-removed-original table {
+  border: 2px dotted;
+}
+
+.leos-double-compare-added-intermediate table, .leos-double-compare-added-original table {
+  border: 3px solid;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill part {
+  display: block;
+}
+bill part > num, bill part > heading {
+  display: block;
+  text-align: center;
+  padding-top: 6pt;
+  padding-bottom: 18pt;
+  font-size: 18pt;
+  font-weight: bold;
+}
+bill aknTitle {
+  display: block;
+}
+bill aknTitle > num, bill aknTitle > heading {
+  display: block;
+  text-align: center;
+  padding-top: 6pt;
+  padding-bottom: 18pt;
+  font-size: 18pt;
+  font-weight: bold;
+}
+bill chapter {
+  display: block;
+}
+bill chapter > num, bill chapter > heading {
+  display: block;
+  text-align: center;
+  padding-top: 6pt;
+  padding-bottom: 18pt;
+  font-size: 16pt;
+  font-weight: bold;
+}
+bill section {
+  display: block;
+}
+bill section > num, bill section > heading {
+  display: table-cell;
+  color: #5B9BD5;
+  text-align: center;
+  padding-top: 6pt;
+  padding-bottom: 18pt;
+  font-size: 16pt;
+  font-weight: none;
+  font-variant: small-caps;
+  letter-spacing: 1px;
+}
+bill conclusions {
+  display: block;
+  padding-top: 20pt;
+}
+bill signature {
+  display: inline-block;
+  padding: 16pt 45pt;
+}
+bill signature > * {
+  display: block;
+  text-align: center;
+  padding: 3pt 0;
+  font-style: italic;
+}
+bill placeholder {
+  display: inline;
+  font-weight: bold;
+  color: blue;
+}
+bill omissis {
+  display: inline;
+  font-weight: bold;
+}
+bill date {
+  display: inline;
+  font-weight: bold;
+}
+bill formula {
+  display: block;
+  font-weight: bold;
+  font-size: 14pt;
+}
+bill block {
+  display: block;
+}
+bill application {
+  display: block;
+  padding-top: 24pt;
+  padding-bottom: 6pt;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill .cke_editable .akn-element-heading, .leos-toc-content .toc-content-area .cke_editable .akn-element-heading {
+  font-size: 12pt;
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+bill .cke_editable .akn-element-heading, .leos-toc-content .toc-content-area .cke_editable .akn-element-heading, bill .cke_editable article .akn-article-num, .leos-toc-content .toc-content-area .cke_editable article .akn-article-num, bill .cke_editable article .akn-article-heading, .leos-toc-content .toc-content-area .cke_editable article .akn-article-heading {
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+
+bill .cke_editable .akn-element-heading, .leos-toc-content .toc-content-area .cke_editable .akn-element-heading {
+  margin: 0 !important;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill img:before, .leos-toc-content .toc-content-area img:before {
+  content: "Image preview not available: \aTitle: " attr(title) "\a Alternative: " attr(alt);
+  white-space: pre;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+div.leos-document-view div.leos-doc-content bill .leos-content-soft-removed[leos\:softaction="move_to"] :not([leos\:origin="cn"]):not(span), div.leos-document-view div.leos-doc-content bill .leos-content-soft-removed[leos\:softaction="move_to"] num[leos\:origin="ec"], div.leos-document-view div.leos-doc-content bill .leos-content-soft-removed[leos\:softaction="del"] :not([leos\:origin="cn"]):not(span), div.leos-document-view div.leos-doc-content bill .leos-content-soft-removed[leos\:softaction="del"] num[leos\:origin="cn"], div.leos-document-view div.leos-doc-content bill .leos-content-soft-new num.leos-content-soft-removed, subparagraph.leos-content-soft-new[leos\:indent-origin-num]::before,
+alinea.leos-content-soft-new[leos\:indent-origin-num]::before,
+paragraph.leos-content-soft-new[leos\:indent-origin-num][leos\:indent-unumbered-paragraph]::before, span.leos-content-soft-removed, span.leos-content-soft-removed *, table.leos-content-soft-removed, table[leos\:softaction="del"], table[leos\:softaction="move_to"], tr.leos-content-soft-removed, tr[leos\:softaction="del"], tr[leos\:softaction="move_to"], td.leos-content-soft-removed, td[leos\:softaction="del"], td[leos\:softaction="move_to"], th.leos-content-soft-removed, th[leos\:softaction="del"], th[leos\:softaction="move_to"], .leos-content-soft-removed table, [leos\:softaction="del"] table,
+[leos\:softaction="move_to"] table {
+  text-decoration: line-through;
+  color: #A7A7A7;
+}
+
+div.leos-document-view div.leos-doc-content bill .leos-content-soft-new[leos\:softaction="add"] [leos\:origin="cn"]:not(span):not(list), div.leos-document-view div.leos-doc-content bill .leos-content-soft-new[leos\:softaction="add"] num:not([leos\:origin="ec"]), div.leos-document-view div.leos-doc-content bill .leos-content-soft-new[leos\:softaction="move_from"] num[leos\:origin="cn"], div.leos-document-view div.leos-doc-content bill .leos-content-soft-new[leos\:softaction="move_from"] .leos-content-soft-new *, span.leos-content-soft-new, span.leos-content-soft-new *, table.leos-content-soft-new, table[leos\:softaction="add"], table[leos\:softaction="move_from"], tr.leos-content-soft-new, tr[leos\:softaction="add"], tr[leos\:softaction="move_from"], td.leos-content-soft-new, td[leos\:softaction="add"], td[leos\:softaction="move_from"], th.leos-content-soft-new, th[leos\:softaction="add"], th[leos\:softaction="move_from"], .leos-content-soft-new table, [leos\:softaction="add"] table,
+[leos\:softaction="move_from"] table {
+  font-weight: bold;
+}
+
+div.leos-document-view div.leos-doc-content bill .leos-content-soft-new[leos\:softaction="move_from"] :not([leos\:origin="cn"]):not(span):not(heading):not(authorialnote) {
+  font-weight: normal;
+}
+
+div.leos-document-view div.leos-doc-content bill .leos-content-soft-new[leos\:softaction="add"] num[leos\:origin="cn"], div.leos-document-view div.leos-doc-content bill .leos-content-soft-new[leos\:softaction="add"] num[leos\:origin="ec"] {
+  padding-bottom: 0;
+}
+div.leos-document-view div.leos-doc-content bill .leos-content-soft-removed[leos\:softaction="move_to"] num[leos\:origin="cn"], div.leos-document-view div.leos-doc-content bill .leos-content-soft-removed[leos\:softaction="move_to"] num[leos\:origin="ec"] {
+  padding-bottom: 0;
+}
+div.leos-document-view div.leos-doc-content bill .leos-content-soft-new .leos-content-soft-removed[leos\:softaction="move_to"] *:not([leos\:origin="cn"]):not(span), div.leos-document-view div.leos-doc-content bill .leos-content-soft-new .leos-content-soft-removed[leos\:softaction="move_to"] num[leos\:origin="cn"],
+div.leos-document-view div.leos-doc-content bill .leos-content-soft-new .leos-content-soft-removed[leos\:softaction="del"] *:not([leos\:origin="cn"]):not(span),
+div.leos-document-view div.leos-doc-content bill .leos-content-soft-new .leos-content-soft-removed[leos\:softaction="del"] num[leos\:origin="cn"] {
+  text-decoration: line-through;
+}
+div.leos-document-view div.leos-doc-content bill .leos-content-soft-new[leos\:softaction="move_from"] num[leos\:origin="cn"], div.leos-document-view div.leos-doc-content bill .leos-content-soft-new[leos\:softaction="move_from"] num[leos\:origin="ec"] {
+  padding-bottom: 0;
+}
+
+bill subparagraph.leos-content-soft-new[leos\:indent-origin-num]::before {
+  margin-right: -20pt;
+}
+
+doc subparagraph.leos-content-soft-new[leos\:indent-origin-num]::before {
+  margin-left: -20pt;
+}
+
+subparagraph.leos-content-soft-new[leos\:indent-origin-num]::before,
+alinea.leos-content-soft-new[leos\:indent-origin-num]::before,
+paragraph.leos-content-soft-new[leos\:indent-origin-num][leos\:indent-unumbered-paragraph]::before {
+  content: attr(leos\:indent-origin-num);
+}
+
+.leos-content-soft-new img, [leos\:softaction="add"] img,
+[leos\:softaction="move_from"] img {
+  border: 3px solid;
+}
+
+.leos-content-soft-removed img, [leos\:softaction="del"] img,
+[leos\:softaction="move_to"] img {
+  border: 2px dotted;
+}
+
+table.leos-content-soft-new, table[leos\:softaction="add"], table[leos\:softaction="move_from"], tr.leos-content-soft-new, tr[leos\:softaction="add"], tr[leos\:softaction="move_from"], td.leos-content-soft-new, td[leos\:softaction="add"], td[leos\:softaction="move_from"], th.leos-content-soft-new, th[leos\:softaction="add"], th[leos\:softaction="move_from"] {
+  border: 3px solid;
+}
+table.leos-content-soft-removed, table[leos\:softaction="del"], table[leos\:softaction="move_to"], tr.leos-content-soft-removed, tr[leos\:softaction="del"], tr[leos\:softaction="move_to"], td.leos-content-soft-removed, td[leos\:softaction="del"], td[leos\:softaction="move_to"], th.leos-content-soft-removed, th[leos\:softaction="del"], th[leos\:softaction="move_to"] {
+  border: 2px dotted;
+}
+
+.leos-content-soft-removed table, [leos\:softaction="del"] table,
+[leos\:softaction="move_to"] table {
+  border: 2px dotted;
+}
+
+.leos-content-soft-new table, [leos\:softaction="add"] table,
+[leos\:softaction="move_from"] table {
+  border: 3px solid;
+}
+
+.leos-authnote-table span.leos-content-soft-new * {
+  font-weight: bold;
+}
+.leos-authnote-table span.leos-content-soft-new * a.ref2link-generated {
+  text-decoration: underline;
+  color: black;
+}
+
+.leos-authnote marker span.leos-content-soft-new,
+.leos-authnote marker span.leos-content-soft-removed {
+  font-weight: bold;
+  color: blue;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or â€“ as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill article > num, bill .cke_editable article .akn-article-num, .leos-toc-content .toc-content-area .cke_editable article .akn-article-num {
+  display: block;
+  text-align: center;
+  font-style: italic;
+  padding-top: 18pt;
+  padding-bottom: 6pt;
+}
+
+bill article > heading, bill .cke_editable article .akn-article-heading, .leos-toc-content .toc-content-area .cke_editable article .akn-article-heading {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  padding-top: 6pt;
+  padding-bottom: 6pt;
+}
+
+bill article {
+  display: block;
+}
+
+bill .cke_editable article .akn-article-num, .leos-toc-content .toc-content-area .cke_editable article .akn-article-num {
+  margin: 0 !important;
+}
+bill .cke_editable article .akn-article-heading, .leos-toc-content .toc-content-area .cke_editable article .akn-article-heading {
+  margin: 0 !important;
+}
+
+bill .cke_editable .akn-element-heading, .leos-toc-content .toc-content-area .cke_editable .akn-element-heading, bill .cke_editable article .akn-article-num, .leos-toc-content .toc-content-area .cke_editable article .akn-article-num, bill .cke_editable article .akn-article-heading, .leos-toc-content .toc-content-area .cke_editable article .akn-article-heading {
+  font-size: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+
+bill .cke_editable.cke_show_blocks article, .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks article {
+  position: relative;
+  outline: 1px dotted #808080;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  padding: 24px 0 8px 4px;
+}
+bill .cke_editable.cke_show_blocks article:after, .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks article:after {
+  content: "ARTICLE";
+  color: #808080;
+  font-size: 9px;
+  display: block;
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill alinea, .leos-toc-content .toc-content-area alinea {
+  display: block;
+}
+bill alinea > content > aknP, .leos-toc-content .toc-content-area alinea > content > aknP, bill alinea > content > p, .leos-toc-content .toc-content-area alinea > content > p {
+  display: block;
+}
+bill alinea > content > aknP, .leos-toc-content .toc-content-area alinea > content > aknP {
+  padding-left: 40px;
+}
+
+bill .cke_editable li > ol > li > p:first-child, .leos-toc-content .toc-content-area .cke_editable li > ol > li > p:first-child {
+  padding-top: 0;
+}
+bill .cke_editable li > ol > li > p:last-child, .leos-toc-content .toc-content-area .cke_editable li > ol > li > p:last-child {
+  padding-bottom: 0;
+}
+
+bill .cke_editable.cke_show_blocks li > ol > li > p, .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks li > ol > li > p {
+  position: relative;
+  outline: 1px dotted #808080;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  padding: 24px 0 8px 4px;
+}
+bill .cke_editable.cke_show_blocks li > ol > li > p:after, .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks li > ol > li > p:after {
+  content: "SUB-POINT";
+  color: #808080;
+  font-size: 9px;
+  display: block;
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill paragraph, .leos-toc-content .toc-content-area paragraph {
+  display: block;
+  position: relative;
+}
+bill paragraph > num, .leos-toc-content .toc-content-area paragraph > num {
+  display: block;
+  min-width: 40px;
+  float: left;
+  padding-top: 6pt;
+  padding-left: 3px;
+}
+bill paragraph num[leos\:softaction="del"], .leos-toc-content .toc-content-area paragraph num[leos\:softaction="del"] {
+  text-decoration: line-through;
+  color: #A7A7A7;
+}
+bill paragraph num[leos\:softaction="add"], .leos-toc-content .toc-content-area paragraph num[leos\:softaction="add"] {
+  font-weight: bolder;
+}
+bill paragraph > content, .leos-toc-content .toc-content-area paragraph > content {
+  clear: both;
+}
+bill paragraph > content > aknP, .leos-toc-content .toc-content-area paragraph > content > aknP, bill paragraph > content > p, .leos-toc-content .toc-content-area paragraph > content > p {
+  display: block;
+}
+
+bill .cke_editable article > ol, .leos-toc-content .toc-content-area .cke_editable article > ol {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+bill .cke_editable article > ol > li:before, .leos-toc-content .toc-content-area .cke_editable article > ol > li:before {
+  color: #808080;
+  content: attr(data-akn-num);
+  min-width: 40px;
+  float: left;
+}
+bill .cke_editable article > ol > li.selectedMovedElement, .leos-toc-content .toc-content-area .cke_editable article > ol > li.selectedMovedElement {
+  border-left: 7px transparent solid;
+  border-top: 1px transparent solid;
+  border-right: 1px transparent solid;
+  border-bottom: 1px transparent solid;
+  background-color: cornsilk;
+  border-color: #ADBDCE;
+}
+
+bill .cke_editable.cke_show_blocks article > ol > li, .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks article > ol > li {
+  position: relative;
+  outline: 1px dotted #808080;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  padding: 24px 0 8px 4px;
+}
+bill .cke_editable.cke_show_blocks article > ol > li:after, .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks article > ol > li:after {
+  content: "PARAGRAPH";
+  color: #808080;
+  font-size: 9px;
+  display: block;
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
+bill .cke_editable.cke_show_blocks article > ol > li > p, .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks article > ol > li > p, bill .cke_editable.cke_show_blocks article > ol > li > ol, .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks article > ol > li > ol, bill .cke_editable.cke_show_blocks article > ol > li > table, .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks article > ol > li > table {
+  margin-left: 40px;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill subparagraph, .leos-toc-content .toc-content-area subparagraph {
+  display: block;
+}
+bill subparagraph > content > aknP, .leos-toc-content .toc-content-area subparagraph > content > aknP, bill subparagraph > content > p, .leos-toc-content .toc-content-area subparagraph > content > p {
+  display: block;
+}
+
+bill paragraph num + subparagraph > content > p::before, .leos-toc-content .toc-content-area num + subparagraph > content > p::before, bill paragraph num + subparagraph > content > aknp::before, .leos-toc-content .toc-content-area num + subparagraph > content > aknp::before {
+  display: none;
+}
+
+bill .cke_editable ol > li > p:first-child, .leos-toc-content .toc-content-area .cke_editable ol > li > p:first-child {
+  padding-top: 0;
+}
+bill .cke_editable ol > li > p:last-child, .leos-toc-content .toc-content-area .cke_editable ol > li > p:last-child {
+  padding-bottom: 0;
+}
+
+bill paragraph num ~ .cke_editable > ol[data-akn-name=aknSubParagraphMandate] > li::before, .leos-toc-content .toc-content-area paragraph num ~ .cke_editable > ol[data-akn-name=aknSubParagraphMandate] > li::before {
+  content: '';
+  margin-right: 40px;
+}
+bill paragraph num + .cke_editable > ol[data-akn-name=aknSubParagraphMandate] > li::before, .leos-toc-content .toc-content-area paragraph num + .cke_editable > ol[data-akn-name=aknSubParagraphMandate] > li::before {
+  display: none;
+}
+
+bill .cke_editable.cke_show_blocks ol > li > p, .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks ol > li > p {
+  position: relative;
+  outline: 1px dotted #808080;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  padding: 24px 0 8px 4px;
+}
+bill .cke_editable.cke_show_blocks ol > li > p:after, .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks ol > li > p:after {
+  content: "SUBPARAGRAPH";
+  color: #808080;
+  font-size: 9px;
+  display: block;
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
+bill .cke_editable.cke_show_blocks ol > li > p::after, .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks ol > li > p::after {
+  padding-left: 4px;
+}
+bill .cke_editable.cke_show_blocks ol > li > h2, .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks ol > li > h2 {
+  position: relative;
+  outline: 1px dotted #808080;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  padding: 24px 0 8px 4px;
+}
+bill .cke_editable.cke_show_blocks ol > li > h2:after, .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks ol > li > h2:after {
+  content: "HEADING";
+  color: #808080;
+  font-size: 9px;
+  display: block;
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
+
+bill paragraph num ~ subparagraph > content > p::before, .leos-toc-content .toc-content-area num ~ subparagraph > content > p::before, bill paragraph num ~ subparagraph > content > aknp::before, .leos-toc-content .toc-content-area num ~ subparagraph > content > aknp::before, bill .cke_editable ol > li[data-akn-name="aknNumberedParagraph"] > p:not(:first-of-type)::before, .leos-toc-content .toc-content-area .cke_editable ol > li[data-akn-name="aknNumberedParagraph"] > p:not(:first-of-type)::before {
+  content: '';
+  margin-right: 40px;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill mref, .leos-toc-content .toc-content-area mref {
+  display: inline-block;
+  font-weight: normal;
+  color: #507C90;
+  outline: 1px dotted #507C90;
+}
+bill mref[leos\:broken], .leos-toc-content .toc-content-area mref[leos\:broken] {
+  color: red;
+  font-style: italic;
+  outline: 1px dotted red;
+}
+bill mref[leos\:broken]:after, .leos-toc-content .toc-content-area mref[leos\:broken]:after {
+  display: inline-block;
+  font-style: normal;
+  font-family: "Vaadin-Icons";
+  content: "warning";
+  vertical-align: bottom;
+}
+bill mref[leos\:broken] > ref, .leos-toc-content .toc-content-area mref[leos\:broken] > ref {
+  color: red;
+}
+bill ref, .leos-toc-content .toc-content-area ref {
+  color: blue;
+}
+bill ref:hover, .leos-toc-content .toc-content-area ref:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill clause {
+  display: block;
+}
+bill clause aknP, bill clause p {
+  display: block;
+}
+
+bill .cke_editable [data-akn-name=clause] p, .leos-toc-content .toc-content-area .cke_editable [data-akn-name=clause] p {
+  display: block;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill citation, .leos-toc-content .toc-content-area citation {
+  display: block;
+}
+bill citation > aknP, .leos-toc-content .toc-content-area citation > aknP, bill citation > p, .leos-toc-content .toc-content-area citation > p {
+  display: block;
+}
+
+bill .cke_editable.cke_show_blocks div[data-akn-name=citations] p[data-akn-name="citation"], .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks div[data-akn-name=citations] p[data-akn-name="citation"] {
+  position: relative;
+  outline: 1px dotted #808080;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  padding: 24px 0 8px 4px;
+}
+bill .cke_editable.cke_show_blocks div[data-akn-name=citations] p[data-akn-name="citation"]:after, .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks div[data-akn-name=citations] p[data-akn-name="citation"]:after {
+  content: "CITATION";
+  color: #808080;
+  font-size: 9px;
+  display: block;
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+citations {
+  display: block;
+}
+
+bill .cke_editable.cke_show_blocks div[data-akn-name=citations], .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks div[data-akn-name=citations] {
+  position: relative;
+  outline: 1px dotted #808080;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  padding: 24px 0 8px 4px;
+}
+bill .cke_editable.cke_show_blocks div[data-akn-name=citations]:after, .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks div[data-akn-name=citations]:after {
+  content: "CITATIONS";
+  color: #808080;
+  font-size: 9px;
+  display: block;
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill {
+  /* styling of the comments markers */
+}
+bill .leos-balloon {
+  min-width: 276px;
+  padding: 0;
+}
+bill .leos-balloon aknp, bill .leos-balloon p {
+  padding: 0;
+}
+bill .leos-balloon .popover-title {
+  display: table-cell;
+  border: solid 1px transparent;
+  padding: 0 5px;
+  margin-top: 0;
+  border-radius: 6px 0 0 0;
+}
+bill .leos-balloon .popover-title:before {
+  font-family: "Vaadin-Icons";
+}
+bill .leos-balloon .\~leosComment .popover-title:before {
+  content: '\e767  ';
+}
+bill .leos-balloon .popover-content {
+  padding: 5px 5px;
+}
+bill .leos-balloon.selected {
+  z-index: 9999;
+  background-color: #ffd5d6;
+  border: 1px solid #ffa7aa;
+}
+bill .leos-balloon.selected.right > .arrow {
+  border-right-color: #ffa7aa;
+}
+bill .leos-balloon.selected.right > .arrow:after {
+  border-right-color: #ffd5d6;
+}
+bill .leos-balloon.selected .leos-popover-header * {
+  background-color: #ffa7aa;
+}
+bill .leos-balloon.selected .popover-title {
+  border: 1px solid transparent;
+}
+bill .leos-balloon.selected .leos-popover-nav {
+  border-bottom: 1px solid transparent;
+}
+bill .leos-balloon.right > .arrow {
+  top: 15px !important;
+}
+bill .leos-popover-nav {
+  display: table-cell;
+  border: solid 1px transparent;
+  border-radius: 0 6px 0 0;
+}
+bill .leos-popover-header {
+  display: table;
+  background-color: #f7f7f7;
+  width: 100%;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px 6px 0 0;
+}
+bill [refersTo="~leosComment"] {
+  display: inline;
+  position: relative;
+  margin-left: -3px;
+}
+bill [refersTo="~leosComment"]:after {
+  position: absolute;
+  content: url("../img/left-brace.png");
+  left: 3px;
+}
+bill [refersTo="~leosComment"]:before {
+  position: absolute;
+  content: url("../img/right-brace.png");
+}
+bill [refersTo="~leosComment"] > * {
+  display: none;
+}
+bill .balloon-actions {
+  display: none;
+  float: right;
+  font-size: 13px;
+  font-family: "Open Sans";
+}
+bill .balloon-actions > * {
+  color: #B3B3B1;
+  text-decoration: none;
+  padding-right: 10px;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill .leos-highlight-yellow {
+  background-color: #FFFF00;
+}
+bill .leos-highlight-green {
+  background-color: #00FF00;
+}
+bill .leos-highlight-cyan {
+  background-color: #00FFFF;
+}
+bill .leos-highlight-pink {
+  background-color: #FF00FF;
+}
+bill .leos-highlight-blue {
+  background-color: #0000FF;
+}
+bill .leos-highlight-red {
+  background-color: #FF0000;
+}
+bill .leos-highlight-grey {
+  background-color: #C0C0C0;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill point, .leos-toc-content .toc-content-area point, bill indent, .leos-toc-content .toc-content-area indent, bill list point,
+bill list indent {
+  display: block;
+  position: relative;
+}
+bill point > num, .leos-toc-content .toc-content-area point > num, bill indent > num, .leos-toc-content .toc-content-area indent > num, bill list point > num, .leos-toc-content .toc-content-area list point > num,
+bill list indent > num,
+.leos-toc-content .toc-content-area list indent > num {
+  display: block;
+  min-width: 40px;
+  float: left;
+}
+bill point > content > p, .leos-toc-content .toc-content-area point > content > p, bill indent > content > p, .leos-toc-content .toc-content-area indent > content > p, bill list point > content > p,
+bill list indent > content > p {
+  display: block;
+}
+bill point > content > aknP, .leos-toc-content .toc-content-area point > content > aknP, bill indent > content > aknP, .leos-toc-content .toc-content-area indent > content > aknP, bill list point > content > aknP,
+bill list indent > content > aknP {
+  display: block;
+  padding-left: 40px;
+}
+
+bill list point, .leos-toc-content .toc-content-area list point,
+bill list indent,
+.leos-toc-content .toc-content-area list indent {
+  padding-left: 40px;
+}
+
+bill .cke_editable ol[data-akn-name=aknPointMandateOrderedList], .leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknPointMandateOrderedList],
+bill .cke_editable ol[data-akn-name=aknAlineaMandate],
+.leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknAlineaMandate],
+bill .cke_editable ol[data-akn-name=aknNumberedParagraphMandate],
+.leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknNumberedParagraphMandate],
+bill .cke_editable ol[data-akn-name=aknSubParagraphMandate],
+.leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknSubParagraphMandate],
+bill .cke_editable li > ol,
+.leos-toc-content .toc-content-area .cke_editable li > ol,
+bill .cke_editable li > ul,
+.leos-toc-content .toc-content-area .cke_editable li > ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+bill .cke_editable ol[data-akn-name=aknPointMandateOrderedList] > li[data-akn-num], .leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknPointMandateOrderedList] > li[data-akn-num],
+bill .cke_editable ol[data-akn-name=aknAlineaMandate] > li[data-akn-num],
+.leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknAlineaMandate] > li[data-akn-num],
+bill .cke_editable ol[data-akn-name=aknNumberedParagraphMandate] > li[data-akn-num],
+.leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknNumberedParagraphMandate] > li[data-akn-num],
+bill .cke_editable ol[data-akn-name=aknSubParagraphMandate] > li[data-akn-num],
+.leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknSubParagraphMandate] > li[data-akn-num],
+bill .cke_editable li > ol > li[data-akn-num],
+.leos-toc-content .toc-content-area .cke_editable li > ol > li[data-akn-num],
+bill .cke_editable li > ul > li[data-akn-num],
+.leos-toc-content .toc-content-area .cke_editable li > ul > li[data-akn-num] {
+  position: relative;
+}
+bill .cke_editable ol[data-akn-name=aknPointMandateOrderedList] > li[data-akn-num]:before, .leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknPointMandateOrderedList] > li[data-akn-num]:before,
+bill .cke_editable ol[data-akn-name=aknAlineaMandate] > li[data-akn-num]:before,
+.leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknAlineaMandate] > li[data-akn-num]:before,
+bill .cke_editable ol[data-akn-name=aknNumberedParagraphMandate] > li[data-akn-num]:before,
+.leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknNumberedParagraphMandate] > li[data-akn-num]:before,
+bill .cke_editable ol[data-akn-name=aknSubParagraphMandate] > li[data-akn-num]:before,
+.leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknSubParagraphMandate] > li[data-akn-num]:before,
+bill .cke_editable li > ol > li[data-akn-num]:before,
+.leos-toc-content .toc-content-area .cke_editable li > ol > li[data-akn-num]:before,
+bill .cke_editable li > ul > li[data-akn-num]:before,
+.leos-toc-content .toc-content-area .cke_editable li > ul > li[data-akn-num]:before {
+  color: #808080;
+  content: attr(data-akn-num);
+  min-width: 40px;
+  float: left;
+}
+bill .cke_editable ol[data-akn-name=aknPointMandateOrderedList] > li.selectedMovedElement, .leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknPointMandateOrderedList] > li.selectedMovedElement,
+bill .cke_editable ol[data-akn-name=aknAlineaMandate] > li.selectedMovedElement,
+.leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknAlineaMandate] > li.selectedMovedElement,
+bill .cke_editable ol[data-akn-name=aknNumberedParagraphMandate] > li.selectedMovedElement,
+.leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknNumberedParagraphMandate] > li.selectedMovedElement,
+bill .cke_editable ol[data-akn-name=aknSubParagraphMandate] > li.selectedMovedElement,
+.leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknSubParagraphMandate] > li.selectedMovedElement,
+bill .cke_editable li > ol > li.selectedMovedElement,
+.leos-toc-content .toc-content-area .cke_editable li > ol > li.selectedMovedElement,
+bill .cke_editable li > ul > li.selectedMovedElement,
+.leos-toc-content .toc-content-area .cke_editable li > ul > li.selectedMovedElement {
+  border-left: 7px transparent solid;
+  border-top: 1px transparent solid;
+  border-right: 1px transparent solid;
+  border-bottom: 1px transparent solid;
+  background-color: cornsilk;
+  border-color: #ADBDCE;
+}
+bill .cke_editable li[data-akn-name=aknNumberedParagraph] > ol[data-akn-name=aknOrderedList], .leos-toc-content .toc-content-area .cke_editable li[data-akn-name=aknNumberedParagraph] > ol[data-akn-name=aknOrderedList],
+bill .cke_editable ol[data-akn-name=aknPointMandateOrderedList],
+.leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknPointMandateOrderedList],
+bill .cke_editable ol[data-akn-name=aknPointMandateOrderedList] > li,
+.leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknPointMandateOrderedList] > li,
+bill .cke_editable ol[data-akn-name=aknAlineaMandate],
+.leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknAlineaMandate],
+bill .cke_editable li > ol > li[data-akn-num],
+.leos-toc-content .toc-content-area .cke_editable li > ol > li[data-akn-num] {
+  padding-left: 40px;
+}
+bill .cke_editable ol[data-akn-name=aknPointMandateOrderedList] > li[data-akn-num]:before, .leos-toc-content .toc-content-area .cke_editable ol[data-akn-name=aknPointMandateOrderedList] > li[data-akn-num]:before,
+bill .cke_editable li > ol > li[data-akn-num]:before,
+.leos-toc-content .toc-content-area .cke_editable li > ol > li[data-akn-num]:before {
+  margin-left: -40px;
+}
+
+bill .cke_editable.cke_show_blocks ol[data-akn-name=aknPointMandateOrderedList] li, .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks ol[data-akn-name=aknPointMandateOrderedList] li,
+bill .cke_editable.cke_show_blocks li > ol li,
+.leos-toc-content .toc-content-area .cke_editable.cke_show_blocks li > ol li {
+  position: relative;
+  outline: 1px dotted #808080;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  padding: 24px 0 8px 44px;
+}
+bill .cke_editable.cke_show_blocks ol[data-akn-name=aknPointMandateOrderedList] li:after, .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks ol[data-akn-name=aknPointMandateOrderedList] li:after,
+bill .cke_editable.cke_show_blocks li > ol li:after,
+.leos-toc-content .toc-content-area .cke_editable.cke_show_blocks li > ol li:after {
+  content: "POINT";
+  color: #808080;
+  font-size: 9px;
+  display: block;
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
+bill .cke_editable.cke_show_blocks li > ol li[data-akn-num="-"], .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks li > ol li[data-akn-num="-"] {
+  position: relative;
+  outline: 1px dotted #808080;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  padding: 24px 0 8px 44px;
+}
+bill .cke_editable.cke_show_blocks li > ol li[data-akn-num="-"]:after, .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks li > ol li[data-akn-num="-"]:after {
+  content: "INDENT";
+  color: #808080;
+  font-size: 9px;
+  display: block;
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill preamble, .leos-toc-content .toc-content-area preamble {
+  display: block;
+  padding-top: 24pt;
+  padding-bottom: 14pt;
+}
+bill preamble > *, .leos-toc-content .toc-content-area preamble > * {
+  display: block;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill recital, .leos-toc-content .toc-content-area recital {
+  display: block;
+}
+bill recital > num, .leos-toc-content .toc-content-area recital > num {
+  min-width: 32px;
+  float: left;
+}
+bill recital > aknP, .leos-toc-content .toc-content-area recital > aknP, bill recital > p, .leos-toc-content .toc-content-area recital > p {
+  display: block;
+  margin-left: 32px;
+}
+
+bill .cke_editable p[data-akn-name="recital"], .leos-toc-content .toc-content-area .cke_editable p[data-akn-name="recital"] {
+  padding-left: 32px;
+}
+bill .cke_editable p[data-akn-name="recital"]:before, .leos-toc-content .toc-content-area .cke_editable p[data-akn-name="recital"]:before {
+  color: #808080;
+  content: attr(data-akn-num);
+  min-width: 32px;
+  margin-left: -32px;
+  float: left;
+}
+
+bill .cke_editable.cke_show_blocks div[data-akn-name=recitals] p[data-akn-name="recital"], .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks div[data-akn-name=recitals] p[data-akn-name="recital"] {
+  position: relative;
+  outline: 1px dotted #808080;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  padding: 24px 0 8px 36px;
+}
+bill .cke_editable.cke_show_blocks div[data-akn-name=recitals] p[data-akn-name="recital"]:after, .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks div[data-akn-name=recitals] p[data-akn-name="recital"]:after {
+  content: "RECITAL";
+  color: #808080;
+  font-size: 9px;
+  display: block;
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+recitals {
+  display: block;
+}
+recitals intro > aknP {
+  display: block;
+}
+
+bill .cke_editable.cke_show_blocks div[data-akn-name=recitals], .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks div[data-akn-name=recitals] {
+  position: relative;
+  outline: 1px dotted #808080;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  padding: 24px 0 8px 4px;
+}
+bill .cke_editable.cke_show_blocks div[data-akn-name=recitals]:after, .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks div[data-akn-name=recitals]:after {
+  content: "RECITALS";
+  color: #808080;
+  font-size: 9px;
+  display: block;
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill .cke_editable ol[data-akn-depth="5"] > li > p, .leos-toc-content .toc-content-area .cke_editable ol[data-akn-depth="5"] > li > p, bill .cke_editable ol[data-akn-depth="6"] > li > p, .leos-toc-content .toc-content-area .cke_editable ol[data-akn-depth="6"] > li > p, bill .cke_editable ol[data-akn-depth="7"] > li > p, .leos-toc-content .toc-content-area .cke_editable ol[data-akn-depth="7"] > li > p {
+  margin-left: 65px;
+}
+bill .cke_editable ol[data-akn-depth="1"] > li > p, .leos-toc-content .toc-content-area .cke_editable ol[data-akn-depth="1"] > li > p, bill .cke_editable ol[data-akn-depth="2"] > li > p, .leos-toc-content .toc-content-area .cke_editable ol[data-akn-depth="2"] > li > p, bill .cke_editable ol[data-akn-depth="3"] > li > p, .leos-toc-content .toc-content-area .cke_editable ol[data-akn-depth="3"] > li > p, bill .cke_editable ol[data-akn-depth="4"] > li > p, .leos-toc-content .toc-content-area .cke_editable ol[data-akn-depth="4"] > li > p {
+  margin-left: 26px;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill level[leos\:depth="5"] .cke_editable > p[data-akn-name="aknLevelNum"], bill level[leos\:depth="6"] .cke_editable > p[data-akn-name="aknLevelNum"], bill level[leos\:depth="7"] .cke_editable > p[data-akn-name="aknLevelNum"] {
+  min-width: 105px;
+}
+bill level[leos\:depth="1"] .cke_editable > p[data-akn-name="aknLevelNum"], bill level[leos\:depth="2"] .cke_editable > p[data-akn-name="aknLevelNum"], bill level[leos\:depth="3"] .cke_editable > p[data-akn-name="aknLevelNum"], bill level[leos\:depth="4"] .cke_editable > p[data-akn-name="aknLevelNum"] {
+  min-width: 67px;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+bill level {
+  position: relative;
+  min-height: 36px;
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  padding: 0;
+}
+bill level > * {
+  grid-column: 2;
+}
+bill level > num {
+  display: block;
+  padding-right: 20px;
+  float: left;
+  padding-top: 6pt;
+  grid-column: 1;
+  height: fit-content;
+}
+bill level num[leos\:softaction="del"] {
+  text-decoration: line-through;
+  color: #A7A7A7;
+}
+bill level num[leos\:softaction="add"] {
+  font-weight: bolder;
+}
+bill level > content {
+  clear: both;
+}
+bill level > content > aknP, bill level > content > p {
+  display: block;
+}
+bill level > list > point {
+  padding-left: 0px;
+}
+bill level heading {
+  padding-top: 6pt;
+  display: block;
+}
+bill level[leos\:depth="1"] > num, bill level[leos\:depth="2"] > num, bill level[leos\:depth="3"] > num, bill level[leos\:depth="4"] > num {
+  min-width: 72px;
+}
+bill level[leos\:depth="5"] > num, bill level[leos\:depth="6"] > num, bill level[leos\:depth="7"] > num {
+  min-width: 110px;
+}
+bill level[leos\:origin='ec'] point > list > .cke_editable > ol[data-akn-name="aknPointMandateOrderedList"] {
+  padding-left: 40px;
+}
+
+bill .cke_editable ol[data-akn-name="aknAnnexList"][data-akn-element="level"], .leos-toc-content .toc-content-area .cke_editable ol[data-akn-name="aknAnnexList"][data-akn-element="level"] {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+}
+bill .cke_editable ol[data-akn-name="aknAnnexList"][data-akn-element="level"] > li, .leos-toc-content .toc-content-area .cke_editable ol[data-akn-name="aknAnnexList"][data-akn-element="level"] > li {
+  display: block;
+}
+bill .cke_editable ol[data-akn-name="aknAnnexList"][data-akn-element="level"] > li:before, .leos-toc-content .toc-content-area .cke_editable ol[data-akn-name="aknAnnexList"][data-akn-element="level"] > li:before {
+  color: #808080;
+  content: attr(data-akn-num);
+  float: left;
+  grid-column: 1;
+}
+bill .cke_editable ol[data-akn-name="aknAnnexList"][data-akn-element="level"] > li > *, .leos-toc-content .toc-content-area .cke_editable ol[data-akn-name="aknAnnexList"][data-akn-element="level"] > li > * {
+  grid-column: 2;
+}
+bill .cke_editable .akn-element-heading, .leos-toc-content .toc-content-area .cke_editable .akn-element-heading {
+  text-align: left;
+  font-weight: normal;
+}
+bill .cke_editable .akn-element-heading:hover, .leos-toc-content .toc-content-area .cke_editable .akn-element-heading:hover {
+  outline: 2px solid #47a4f5;
+}
+
+bill .cke_editable.cke_show_blocks div ~ ol, .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks div ~ ol {
+  position: relative;
+  outline: 1px dotted #808080;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  padding: 24px 0 8px 4px;
+}
+bill .cke_editable.cke_show_blocks div ~ ol:after, .leos-toc-content .toc-content-area .cke_editable.cke_show_blocks div ~ ol:after {
+  content: "POINT.";
+  color: #808080;
+  font-size: 9px;
+  display: block;
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
+
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+/**
+ * Copyright 2021 European Commission
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ *     https://joinup.ec.europa.eu/software/page/eupl
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+.printui {
+  text-align: center;
+}
+.printui div {
+  overflow: visible;
+  display: block;
+}
+.printui .leos > .leos-double-comparison-content > akomaNtoso > bill > * {
+  border: 0px;
+}
+.printui .leos > .leos-double-comparison-content > akomaNtoso > doc > * {
+  border: 0px;
+  box-shadow: none;
+}
+.printui table, .printui img, .printui aknp, .printui span, .printui authorialNote, .printui mref, .printui inline, .printui alinea, .printui point, .printui subparagraph {
+  page-break-inside: avoid;
+}
+
+@page {
+  margin: 2.5cm 0;
+  padding: 0;
+}
+.exportpdf coverpage {
+  padding-top: 0px;
+  padding-bottom: -250px;
+}
+
+.exportpdf coverpage container #coverpage__container_2 {
+  text-align: right;
+}
+.exportpdf coverpage container #coverpage__container_4 {
+  padding-right: -50px;
+  margin-bottom: -75px;
+}
+
+.exportpdf preface {
+  padding-top: 0px;
+}
+
+.exportpdf mainbody division content {
+  margin-left: 2.5cm;
+  margin-right: 2.5cm;
+}
+
+.exportpdf paragraph > num + content {
+  display: block;
+  clear: none;
+  margin-left: 60px;
+  padding-bottom: 0pt;
+  padding-top: 0pt;
+}
+
+akomaNtoso meta * {
+  display: none;
+}
+
+bill {
+  display: block;
+}
+
+.leos-toc {
+  overflow: hidden;
+  display: block;
+}
+
+.leos-toc-header {
+  display: block;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  font-variant: small-caps;
+  letter-spacing: 1px;
+  padding-bottom: 1em;
+}
+
+.leos-toc-item {
+  display: block;
+  padding-left: 1em;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+}
+
+.leos-toc-link {
+  text-decoration: none;
+}
+.leos-toc-link:hover {
+  text-decoration: underline;
+}
+
+.leos-toc-content .toc-content-area {
+  overflow-y: auto;
+  padding: 3px 5px;
+  border: 1px solid #B7B7B7;
+}
+
+.leos-toc-content-hide {
+  display: none;
+}
+
+.v-caption-leos-toc-content-hide * {
+  display: none;
+}
