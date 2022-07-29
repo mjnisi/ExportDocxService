@@ -6,9 +6,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -69,7 +69,6 @@ public class ExportServiceImpl implements ExportService {
 		}
 		
 		String EXPORT_TEMPLATE_BVD_FILE = "/templates/StatementEDPB.dotx";
-//		String EXPORT_TEMPLATE_BVD_FILE = "/templates/StatementEDPBcomment3.dotx";
 
 		
 		String jsonPath = "/documents/Proposal_197_2447391798399561462/PROP_ACT_6020660205072156884/media/annot_bill_cl5jc32710002q011gkfo1dto.xml.json";
@@ -88,13 +87,15 @@ public class ExportServiceImpl implements ExportService {
 						
 			List<HashMap<String, String>> annotations = getAnnotationsFromFile(jsonPath);
 	
-			
-			// Comments
-			CommentsPart cp = new CommentsPart();
-			mlPackage.getMainDocumentPart().addTargetPart(cp);
+			if (annotations != null ) {
+				// Create CommentsPart
+				CommentsPart cp = new CommentsPart();
+				mlPackage.getMainDocumentPart().addTargetPart(cp);
 
-			Comments comments = factory.createComments();
-			cp.setJaxbElement(comments);
+				Comments comments = factory.createComments();
+				cp.setJaxbElement(comments);
+			}
+
 
 			
 			VTDGen vg = new VTDGen();
@@ -102,12 +103,15 @@ public class ExportServiceImpl implements ExportService {
 			vg.parse(false);
 
 			AutoPilot ap = new AutoPilot();
+			AutoPilot ap2 = new AutoPilot();
 
 			// Title
 			ap.selectXPath("/akomaNtoso/bill/coverPage/longTitle/p//text()");
 
 			VTDNav vn = vg.getNav();
 			ap.bind(vn);
+			ap2.bind(vn);
+
 
 			int result = -1;
 			String title = "";
@@ -141,7 +145,17 @@ public class ExportServiceImpl implements ExportService {
 			// Body
 			ap.resetXPath();
 			ap.bind(vn);
-			ap.selectXPath("//body/paragraph/content/p/text()");
+			ap.declareXPathNameSpace("xml", "https://www.w3.org/2001/xml.xsd");
+			ap2.declareXPathNameSpace("xml", "https://www.w3.org/2001/xml.xsd");
+
+			
+			ap.bind(vn);
+			ap2.bind(vn);
+
+			
+//			ap.selectXPath("//body/paragraph/content/p/text()");
+			ap.selectXPath("//body/paragraph/content/p/@id");
+
 			//buscar el id de p y buscarlo dentro del array de id comments para ver si hay q crear un commentario.
 			
 			
@@ -149,17 +163,44 @@ public class ExportServiceImpl implements ExportService {
 			mlPackage.getMainDocumentPart().addStyledParagraphOfText(STYLE_CONTENT, "");
 			mlPackage.getMainDocumentPart().addStyledParagraphOfText(STYLE_CONTENT, "");
 
-			while ((result = ap.evalXPath()) != -1) {
-				
-				String[] positions = {"10:15"};
-				addCommentToP(vn.toString(result), STYLE_CONTENT , positions);
-//				addCommentToP1(id, vn.toString(result), STYLE_CONTENT , annotations);
+			
+		    int count = 0;
 
-				if(logger.isDebugEnabled()){
-					logger.debug("Paragraph : " + vn.toString(result));
-				}
-			}
+		    // iterate over all file IDs
+		    while ((result = ap.evalXPath()) != -1) {
+		      int j;
 
+		      // retrieve the value of the id attribute field
+		      String attributeName = vn.toString(result);
+			    logger.debug(" attributeName ==> " + attributeName);
+
+		      int attributeId = vn.getAttrVal("id");
+			    logger.debug(" attributeId ==> " + attributeId);
+
+		      String attributeVal = vn.toString(attributeId);
+			    logger.debug(" attributeVal ==> " + attributeVal);
+
+			  String path = "//body/paragraph/content/p[@id='"+ attributeVal +"']/text()";
+		      // add the id value to the respective xpath query
+		      ap2.selectXPath(path);
+		      
+		      while ((j = ap2.evalXPath()) != -1) {
+		    	  
+		    	String pId =  attributeVal;
+		    	String p = vn.toString(j);
+			    logger.debug("Paragraph num "+ ++count + " ID ==> " + pId);
+		        logger.debug("paragraph ==> " + p);
+		        
+		        List<HashMap<String, String>> filteredAnn = filterAnnotations(pId, annotations);
+		        addCommentToP1(p, STYLE_CONTENT , filteredAnn);
+		        
+				mlPackage.getMainDocumentPart().addStyledParagraphOfText(STYLE_CONTENT, "");
+
+		      }
+		      ap2.resetXPath();
+		    }
+		    ap.resetXPath();
+		    
 			mlPackage.getMainDocumentPart().addStyledParagraphOfText(STYLE_CONTENT, "");
 			mlPackage.getMainDocumentPart().addStyledParagraphOfText(STYLE_CONTENT, "");
 
@@ -213,7 +254,6 @@ public class ExportServiceImpl implements ExportService {
 		logger.debug("replies :"+replies);
 
 		String jsonPathComments = "$.rows[*].target[*].selector[0]";
-		//buscar tb los start y end, hacer un metodo q reciba parrafo, inicio y fin y cree un comentario. Devuelva un id. 
 	
 		DocumentContext jsonContext = JsonPath.parse(json);
 		List<HashMap<String, String>> jsonAnnotations = jsonContext.read(jsonPathComments);
@@ -245,7 +285,7 @@ public class ExportServiceImpl implements ExportService {
 	
 	private void setMargins() {
 		mlPackage.getMainDocumentPart().getJaxbElement().getBody().getSectPr().getPgMar().setTop(new BigInteger("0"));
-
+		//make those margins work only for the first page
 	}
 	
 	
@@ -285,19 +325,41 @@ public class ExportServiceImpl implements ExportService {
 		}
 		return mainDocumentPart;
 
+	}	
+	
+	private List<HashMap<String, String>> filterAnnotations(String pId, List<HashMap<String, String>> annotations) {
+		List<HashMap<String, String>> pAnn = new ArrayList<HashMap<String, String>>();
+		
+		annotations.forEach(i -> {
+			if(pId.equals(i.get("id"))) {
+				pAnn.add(i);
+			}
+		});
+		
+		return pAnn;
 	}
-
 	
-	
-	private void addCommentToP(String text, String style, String[] positions ) {
+	private void addCommentToP1(String text, String style, List<HashMap<String, String>> pAnnotations ) {
 		
 		P p = mlPackage.getMainDocumentPart().createStyledParagraphOfText(style, "");
 		CTLanguage lang = new CTLanguage();
 		lang.setVal("fr-BE");
 
-		for (String pos : positions) {
-			int startPosition = Integer.parseInt(pos.split(":")[0]);
-			int endPosition = Integer.parseInt(pos.split(":")[1]);
+		pAnnotations.forEach(System.out::println);
+		//exemple
+//		{type=LeosSelector, id=paragraph_1__content__p, exact=Parrafo1, prefix=Parrafo1 Parrafo1Parrafo1 , suffix= Parrafo1 Parrafo1 Parrafo1 Parr, start=26, end=34}
+//		{type=LeosSelector, id=paragraph_1__content__p, exact=Parrafo1, prefix=afo1 Parrafo1 Parrafo1 Parrafo1 , suffix= Parrafo1 Parrafo1 Parrafo1 Parr, start=611, end=619}
+				
+		
+		//hay q hacer un while.. mientra haya annotations, en el primer while hacer un p de 0 a start, el comment de start a fin, 
+		//en el siguiente while empezar con un p de fin a start, luego crear el comment de start a fin 
+		//en el ultimo while hacer un p desde end a fin de parrafo
+		for (HashMap<String, String> hashMap : pAnnotations) {
+			
+			
+			
+			int startPosition = 10;
+			int endPosition = 15;
 
 			commentId = commentId.add(java.math.BigInteger.ONE);
 			
@@ -367,8 +429,7 @@ public class ExportServiceImpl implements ExportService {
 	
 
 	}
-	
-	
+
 	
 	
 	private org.docx4j.wml.Comments.Comment createComment(java.math.BigInteger commentId, String author, Calendar date,
