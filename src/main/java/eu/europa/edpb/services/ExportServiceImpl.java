@@ -9,8 +9,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.commons.compress.utils.IOUtils;
 import org.apache.log4j.Logger;
@@ -22,16 +28,20 @@ import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.openpackaging.parts.WordprocessingML.CommentsPart;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
+import org.docx4j.wml.BooleanDefaultTrue;
 import org.docx4j.wml.CTLanguage;
 import org.docx4j.wml.CommentRangeEnd;
 import org.docx4j.wml.CommentRangeStart;
 import org.docx4j.wml.Comments;
 import org.docx4j.wml.Comments.Comment;
+import org.docx4j.wml.Highlight;
 import org.docx4j.wml.P;
+import org.docx4j.wml.RStyle;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ser.std.CalendarSerializer;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import com.ximpleware.AutoPilot;
@@ -153,7 +163,6 @@ public class ExportServiceImpl implements ExportService {
 			ap2.bind(vn);
 
 			
-//			ap.selectXPath("//body/paragraph/content/p/text()");
 			ap.selectXPath("//body/paragraph/content/p/@id");
 
 			//buscar el id de p y buscarlo dentro del array de id comments para ver si hay q crear un commentario.
@@ -172,16 +181,12 @@ public class ExportServiceImpl implements ExportService {
 
 		      // retrieve the value of the id attribute field
 		      String attributeName = vn.toString(result);
-			    logger.debug(" attributeName ==> " + attributeName);
-
 		      int attributeId = vn.getAttrVal("id");
-			    logger.debug(" attributeId ==> " + attributeId);
-
 		      String attributeVal = vn.toString(attributeId);
-			    logger.debug(" attributeVal ==> " + attributeVal);
+			  
+		      logger.debug(" attributeName ==> " + attributeName + " attributeId ==> " + attributeId + " attributeVal ==> " + attributeVal);
 
 			  String path = "//body/paragraph/content/p[@id='"+ attributeVal +"']/text()";
-		      // add the id value to the respective xpath query
 		      ap2.selectXPath(path);
 		      
 		      while ((j = ap2.evalXPath()) != -1) {
@@ -189,10 +194,9 @@ public class ExportServiceImpl implements ExportService {
 		    	String pId =  attributeVal;
 		    	String p = vn.toString(j);
 			    logger.debug("Paragraph num "+ ++count + " ID ==> " + pId);
-		        logger.debug("paragraph ==> " + p);
 		        
-		        List<HashMap<String, String>> filteredAnn = filterAnnotations(pId, annotations);
-		        addCommentToP1(p, STYLE_CONTENT , filteredAnn);
+		        ArrayList<HashMap<String, String>> filteredAnn = filterAnnotations(pId, annotations);
+		        addCommentToP(p, STYLE_CONTENT , filteredAnn);
 		        
 				mlPackage.getMainDocumentPart().addStyledParagraphOfText(STYLE_CONTENT, "");
 
@@ -242,23 +246,40 @@ public class ExportServiceImpl implements ExportService {
 	private List<HashMap<String, String>> getAnnotationsFromFile(String jsonPath) {
 		
 		String json = getResource(jsonPath);
-		logger.debug("json :"+json);
-
+//
 		JSONObject obj = new JSONObject(json);
 		JSONArray rows = obj.getJSONArray("rows");
-		BigInteger total = obj.getBigInteger("total");
-		JSONArray replies = obj.getJSONArray("replies");
 
-		logger.debug("rows :"+rows);
-		logger.debug("total :"+total);
-		logger.debug("replies :"+replies);
-
-		String jsonPathComments = "$.rows[*].target[*].selector[0]";
-	
-		DocumentContext jsonContext = JsonPath.parse(json);
-		List<HashMap<String, String>> jsonAnnotations = jsonContext.read(jsonPathComments);
-		logger.debug("jsonComments :" + jsonAnnotations);
+		List<HashMap<String, String>> jsonAnnotations = new ArrayList<HashMap<String, String>>();
 		
+		
+		for (int i = 0; i < rows.length(); i++) {
+
+			String jsonPathSelector = "$.rows["+i+"].target[*].selector[0]";
+			String jsonPathAuthor = "$.rows["+i+"].user_info.display_name";
+			String jsonPathCreationDate = "$.rows["+i+"].created";
+			String jsonPathComment = "$.rows["+i+"].text";
+			String jsonPathTag = "$.rows["+i+"].tags[0]";
+
+
+			DocumentContext jsonContext = JsonPath.parse(json);
+
+			List<HashMap<String, String>> selectors = jsonContext.read(jsonPathSelector);
+			String author = jsonContext.read(jsonPathAuthor);
+			String creationDate = jsonContext.read(jsonPathCreationDate);
+			String comment = jsonContext.read(jsonPathComment);
+			String tag = jsonContext.read(jsonPathTag);
+
+			HashMap<String, String> selector = selectors.get(0);
+			selector.put("author", author);
+			selector.put("creationDate", creationDate);
+			selector.put("comment", comment);
+			selector.put("tag", tag);
+
+			jsonAnnotations.add(selector);
+		}
+		
+		logger.debug("jsonComments :" + jsonAnnotations);
 		return jsonAnnotations;
 		
 	}
@@ -327,8 +348,8 @@ public class ExportServiceImpl implements ExportService {
 
 	}	
 	
-	private List<HashMap<String, String>> filterAnnotations(String pId, List<HashMap<String, String>> annotations) {
-		List<HashMap<String, String>> pAnn = new ArrayList<HashMap<String, String>>();
+	private ArrayList<HashMap<String, String>> filterAnnotations(String pId, List<HashMap<String, String>> annotations) {
+		ArrayList<HashMap<String, String>> pAnn = new ArrayList<HashMap<String, String>>();
 		
 		annotations.forEach(i -> {
 			if(pId.equals(i.get("id"))) {
@@ -339,27 +360,28 @@ public class ExportServiceImpl implements ExportService {
 		return pAnn;
 	}
 	
-	private void addCommentToP1(String text, String style, List<HashMap<String, String>> pAnnotations ) {
+	private void addCommentToP(String text, String style, ArrayList<HashMap<String, String>> pAnnotations ) {
 		
 		P p = mlPackage.getMainDocumentPart().createStyledParagraphOfText(style, "");
 		CTLanguage lang = new CTLanguage();
 		lang.setVal("fr-BE");
 
 		pAnnotations.forEach(System.out::println);
-		//exemple
-//		{type=LeosSelector, id=paragraph_1__content__p, exact=Parrafo1, prefix=Parrafo1 Parrafo1Parrafo1 , suffix= Parrafo1 Parrafo1 Parrafo1 Parr, start=26, end=34}
-//		{type=LeosSelector, id=paragraph_1__content__p, exact=Parrafo1, prefix=afo1 Parrafo1 Parrafo1 Parrafo1 , suffix= Parrafo1 Parrafo1 Parrafo1 Parr, start=611, end=619}
-				
-		
-		//hay q hacer un while.. mientra haya annotations, en el primer while hacer un p de 0 a start, el comment de start a fin, 
-		//en el siguiente while empezar con un p de fin a start, luego crear el comment de start a fin 
-		//en el ultimo while hacer un p desde end a fin de parrafo
+			
+		int i = 0;
 		for (HashMap<String, String> hashMap : pAnnotations) {
+		
+			String pId = hashMap.get("id");
+			int startPosition =(Integer) ((Object)hashMap.get("start"));  
+			int endPosition = (Integer) ((Object)hashMap.get("end"));  
+
+			String author = hashMap.get("author");
+			String creationDate = hashMap.get("creationDate");
+			String textComment = (hashMap.get("comment")).replaceAll("<.*?>" , " ");
+			String tag = hashMap.get("tag");//"protected";
+//			String tag = "protected";
+
 			
-			
-			
-			int startPosition = 10;
-			int endPosition = 15;
 
 			commentId = commentId.add(java.math.BigInteger.ONE);
 			
@@ -368,15 +390,14 @@ public class ExportServiceImpl implements ExportService {
 			org.docx4j.wml.Text wT = factory.createText();
 			
 
-			wT.setValue(text.substring(0, startPosition));
+			wT.setValue(text.substring(i, startPosition));
 			wT.setSpace("preserve");
 
 			wRPr.setLang(lang);
 			wR.setRPr(wRPr);
 			wR.getContent().add(wT);
 			p.getContent().add(wR);
-			
-			
+		
 			// Create object for commentRangeStart
 			CommentRangeStart commentrangestart = factory.createCommentRangeStart();
 			commentrangestart.setId(commentId); 
@@ -387,40 +408,54 @@ public class ExportServiceImpl implements ExportService {
 			org.docx4j.wml.RPr wRPr1 = factory.createRPr();
 			org.docx4j.wml.Text wT1 = factory.createText();
 			
+			if(tag.equals("suggestion")) {//protected
+				wT1.setValue("[Depersonalised]");
+				Highlight highlight = factory.createHighlight();
+				highlight.setVal("lightGray");
+				wRPr1.setHighlight(highlight);
+				
+			} else {
+				wT1.setValue(text.substring(startPosition, endPosition));				
 
-			wT1.setValue(text.substring(startPosition, endPosition));
+			}
+
 			wT1.setSpace("preserve");
 			
 			wRPr1.setLang(lang);
 			wR1.setRPr(wRPr1);
 			wR1.getContent().add(wT1);
-
+			
 			p.getContent().add(wR1);
 			
 			
 			// Create object for commentRangeEnd
 			CommentRangeEnd commentrangeend = factory.createCommentRangeEnd();
-			commentrangeend.setId(commentId); // substitute your comment id
+			commentrangeend.setId(commentId);
 
 			p.getContent().add(commentrangeend);
-
-			org.docx4j.wml.R wR2 = factory.createR();
-			org.docx4j.wml.RPr wRPr2 = factory.createRPr();
-			org.docx4j.wml.Text wT2 = factory.createText();
 			
-			wT2.setValue(text.substring(endPosition));
-			wT2.setSpace("preserve");
-
-			wRPr2.setLang(lang);
-			wR2.setRPr(wRPr2);
-			wR2.getContent().add(wT2);
+			i = endPosition;
 			
-			p.getContent().add(wR2);
+			if(pAnnotations.lastIndexOf(hashMap)==pAnnotations.size()-1) {
 
+				org.docx4j.wml.R wR2 = factory.createR();
+				org.docx4j.wml.RPr wRPr2 = factory.createRPr();
+				org.docx4j.wml.Text wT2 = factory.createText();
+				
+				wT2.setValue(text.substring(endPosition));
+				wT2.setSpace("preserve");
+	
+				wRPr2.setLang(lang);
+				wR2.setRPr(wRPr2);
+				wR2.getContent().add(wT2);
+				
+				p.getContent().add(wR2);
+
+			}
 
 			p.getContent().add(createRunCommentReference(commentId));
 
-			Comment theComment = createComment(commentId, "MARIA NISI", null, "my first comment");
+			Comment theComment = createComment(commentId, author, creationDate, textComment);
 
 			mlPackage.getMainDocumentPart().getCommentsPart().getJaxbElement().getComment().add(theComment);
 
@@ -432,7 +467,7 @@ public class ExportServiceImpl implements ExportService {
 
 	
 	
-	private org.docx4j.wml.Comments.Comment createComment(java.math.BigInteger commentId, String author, Calendar date,
+	private org.docx4j.wml.Comments.Comment createComment(java.math.BigInteger commentId, String author, String date,
 			String message) {
 
 		org.docx4j.wml.Comments.Comment comment = factory.createCommentsComment();
@@ -441,9 +476,14 @@ public class ExportServiceImpl implements ExportService {
 			comment.setAuthor(author);
 		}
 		if (date != null) {
-//			String dateString = RFC3339_FORMAT.format(date.getTime()) ;	
-//			comment.setDate(value)
-			// TODO - at present this is XMLGregorianCalendar
+			try {
+				XMLGregorianCalendar result = DatatypeFactory.newInstance().newXMLGregorianCalendar(date);
+				comment.setDate(result);
+
+			} catch (DatatypeConfigurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		org.docx4j.wml.P commentP = factory.createP();
 		comment.getEGBlockLevelElts().add(commentP);
